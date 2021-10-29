@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
 {
+[ApiController]
+[Route("api/[controller]")]
   public class VaultKeepsController : ControllerBase
   {
     private readonly VaultKeepsService _vks;
@@ -30,6 +32,27 @@ namespace Keepr.Controllers
       {
         return BadRequest(e.Message);
       }
+    }
+    [Authorize]
+    [HttpDelete("{vaultKeepId}")]
+    public async Task<ActionResult<VaultKeep>> DeleteVaultKeeps(int vaultKeepId)
+    {
+      try
+      {
+          Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+          var vault = _vks.DeleteVaultKeeps(vaultKeepId);
+          return Ok(vault);
+      }
+      catch (System.Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+    [HttpGet("{vaultKeepId}")]
+    public ActionResult<VaultKeep> GetVaultKeep(int vaultKeepId)
+    {
+      var vaultKeep = _vks.GetVaultKeep(vaultKeepId);
+      return Ok(vaultKeep);
     }
   }
 }

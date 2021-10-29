@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Keepr.Models;
 using Keepr.Repositories;
@@ -22,5 +23,22 @@ namespace Keepr.Services
     {
       return _vkr.CreateVaultKeeps(data);
     }
+
+    public VaultKeep DeleteVaultKeeps(int vaultKeepId)
+    {
+      VaultKeep vaultKeep = GetVaultKeep(vaultKeepId);
+     _vkr.Delete(vaultKeepId);
+     return vaultKeep;
+    }
+    public VaultKeep GetVaultKeep(int vaultKeepId)
+    {
+      VaultKeep vaultKeep = _vkr.GetVaultKeepById(vaultKeepId);
+      if(vaultKeep == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return vaultKeep;
+    }
   }
+
 }

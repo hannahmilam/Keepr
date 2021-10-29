@@ -48,3 +48,15 @@ UPDATE keeps
           img = "https://images.unsplash.com/photo-1599134842279-fe807d23316e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1932&q=80"
         WHERE id = 2
         LIMIT 1;
+
+        INSERT INTO vaultKeep(
+        vaultId,
+        keepId
+        )
+      VALUES (
+        2,
+        2
+          );
+    
+
+      SELECT * FROM vaultKeep;

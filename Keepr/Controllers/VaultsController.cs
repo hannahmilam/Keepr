@@ -50,7 +50,8 @@ namespace Keepr.Controllers
     {
       try
       {
-          return _vks.GetKeepsByVaultId(vaultId);
+          List<VaultKeep> vk = _vks.GetKeepsByVaultId(vaultId);
+          return Ok(vk);
       }
       catch (System.Exception e)
       {
