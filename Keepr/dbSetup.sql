@@ -39,3 +39,12 @@ CREATE TABLE IF NOT EXISTS vaultKeep(
   keepId int NOT NULL COMMENT 'FK: Keep Id',
   FOREIGN KEY(creatorId) REFERENCES accounts(id) ON DELETE CASCADE
 ) default charset utf8 COMMENT '';
+
+SELECT * FROM keeps;
+UPDATE keeps
+        SET
+          name = 'Test',
+          description = 'Testing 123',
+          img = "https://images.unsplash.com/photo-1599134842279-fe807d23316e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1932&q=80"
+        WHERE id = 2
+        LIMIT 1;

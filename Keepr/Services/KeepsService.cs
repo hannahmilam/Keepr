@@ -39,8 +39,9 @@ namespace Keepr.Services
       Keep keep = GetById(data.Id);
       keep.Name = data.Name ?? keep.Name;
       keep.Description = data.Description ?? keep.Description;
-      _keepsRepository.Edit(data);
-      return keep;
+      keep.Img = data.Img ?? keep.Img;
+      var updatedKeep = _keepsRepository.Edit(data);
+      return updatedKeep;
     }
 
     public Keep Delete(int keepId)

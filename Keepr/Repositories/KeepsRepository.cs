@@ -73,14 +73,11 @@ namespace Keepr.Repositories
     {
       string sql = @"
       UPDATE keeps
-        SET 
+        SET
           name = @Name,
           description = @Description,
-          views = @Views,
-          shares = @Shares,
-          keeps, @Keeps,
-          img, @img,
-          creatorId = @CreatorId
+          creatorId = @CreatorId,
+          img = @Img
         WHERE id = @Id
         LIMIT 1";
 
@@ -94,7 +91,7 @@ namespace Keepr.Repositories
 
     public void Delete(int keepId)
     {
-      string sql = "DELETE FROM keeps WHERE id = @keepId LIMI 1;";
+      string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
       var affectedRows = _db.Execute(sql, new {keepId});
       if(affectedRows == 0)
       {
