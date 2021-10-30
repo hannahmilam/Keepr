@@ -13,10 +13,12 @@ namespace Keepr.Controllers
   public class VaultKeepsController : ControllerBase
   {
     private readonly VaultKeepsService _vks;
+    private readonly VaultsService _vs;
 
-    public VaultKeepsController(VaultKeepsService vks)
+    public VaultKeepsController(VaultKeepsService vks, VaultsService vs)
     {
       _vks = vks;
+      _vs = vs;
     }
     [Authorize]
     [HttpPost]
@@ -26,7 +28,13 @@ namespace Keepr.Controllers
       {
           Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
           data.CreatorId = userInfo.Id;
-          var createdVault = _vks.CreateVaultKeeps(data);
+          var getVault = _vs.GetById(data.VaultId, userInfo.Id);
+          if(getVault.CreatorId != userInfo.Id)
+          {
+            return BadRequest("You Are Not Authorized");
+          }
+            data.CreatorId = userInfo.Id;
+          var createdVault = _vks.CreateVaultKeeps(data, userInfo.Id);
           return Ok(createdVault);
       }
       catch (Exception e)

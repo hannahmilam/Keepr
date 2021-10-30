@@ -84,7 +84,7 @@ namespace Keepr.Controllers
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        var keep = _keepsService.Delete(keepId);
+        var keep = _keepsService.Delete(keepId, userInfo.Id);
         return Ok(keep);
       }
       catch (System.Exception e)

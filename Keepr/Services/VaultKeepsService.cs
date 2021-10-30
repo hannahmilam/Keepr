@@ -26,8 +26,12 @@ namespace Keepr.Services
     return _vkr.GetKeepsByVaultId(vaultId);
   }
 
-    public VaultKeep CreateVaultKeeps(VaultKeep data)
+    public VaultKeep CreateVaultKeeps(VaultKeep data, string userId)
     {
+      if(data.CreatorId != userId)
+      {
+        throw new Exception("You're Not Authorized");
+      }
       return _vkr.CreateVaultKeeps(data);
     }
 

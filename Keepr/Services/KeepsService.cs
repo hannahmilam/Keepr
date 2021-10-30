@@ -48,9 +48,13 @@ namespace Keepr.Services
       return updatedKeep;
     }
 
-    public Keep Delete(int keepId)
+    public Keep Delete(int keepId, string userId)
     {
       var keep = GetById(keepId);
+      if(keep.CreatorId != userId)
+      {
+        throw new Exception("You're Not Authorized");
+      }
       _keepsRepository.Delete(keepId);
       return keep;
     }
