@@ -48,16 +48,10 @@ namespace Keepr.Services
             return _repo.GetUsersKeeps(profileId);
             }
 
-            public List<Vault> GetUsersVaults(string profileId, string userId)
+            public List<Vault> GetUsersVaults(string profileId)
             {
                 var vaults = _repo.GetUsersVaults(profileId);
-                if(profileId != userId)
-                {
-                    var publicVaults = vaults.FindAll(v => v.IsPrivate == false);
-                    return publicVaults;
-                } else {
-                    return vaults;
+                return vaults;
                 }
             }
           }
-        }
