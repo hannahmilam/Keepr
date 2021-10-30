@@ -33,7 +33,7 @@ namespace Keepr.Controllers
       }
     }
     [HttpGet("{profileId}/vaults")]
-    public async Task<ActionResult<List<Profile>>> GetVaultsByProfileId(string profileId)
+    public async Task<ActionResult<List<Vault>>> GetVaultsByProfileId(string profileId)
     {
       try
       {
@@ -48,7 +48,7 @@ namespace Keepr.Controllers
       }
     }
     [HttpGet("{profileId}/keeps")]
-    public ActionResult <List<Profile>> GetKeepsByProfileId(string profileId)
+    public ActionResult <List<Keep>> GetKeepsByProfileId(string profileId)
     {
       try
       { 
