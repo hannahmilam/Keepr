@@ -37,6 +37,10 @@ namespace Keepr.Services
     public Keep Edit(Keep data)
     {
       var keep = GetById(data.Id);
+      if(keep.CreatorId != data.CreatorId)
+      {
+        throw new Exception("You're Not Authorized");
+      }
       keep.Name = data.Name ?? keep.Name;
       keep.Description = data.Description ?? keep.Description;
       keep.Img = data.Img ?? keep.Img;

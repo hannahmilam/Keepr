@@ -18,13 +18,18 @@ namespace Keepr.Services
     {
       return _vaultsRepository.GetAll();
     }
-   public Vault GetById(int vaultId)
+   public Vault GetById(int vaultId, string userId)
     {
       var vault = _vaultsRepository.GetById(vaultId);
       if(vault == null)
       {
         throw new Exception("Invalid Id");
       }
+      if(vault.IsPrivate == true && vault.CreatorId != userId)
+      {
+        throw new Exception("This is private");
+      }
+
       return vault;
     }
 
@@ -35,7 +40,11 @@ namespace Keepr.Services
 
     public Vault Edit(Vault data)
     {
-      var vault = GetById(data.Id);
+      var vault = GetById(data.Id, data.CreatorId);
+      if(data.CreatorId != vault.CreatorId)
+      {
+        throw new Exception("You're Not Authorized");
+      }
       vault.Name = data.Name ?? vault.Name;
       vault.Description = data.Description ?? data.Description;
       vault.IsPrivate = data.IsPrivate;
@@ -43,9 +52,13 @@ namespace Keepr.Services
       return vault;
     }
 
-    public Vault Delete(int vaultId)
+    public Vault Delete(int vaultId, string userId)
     {
-      var vault = GetById(vaultId);
+      var vault = GetById(vaultId, userId);
+      if(vault.CreatorId != userId)
+      {
+        throw new Exception("You're Not Authorized!");
+      }
       _vaultsRepository.Delete(vaultId);
       return vault;
     }
