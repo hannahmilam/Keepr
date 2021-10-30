@@ -8,14 +8,21 @@ namespace Keepr.Services
   public class VaultKeepsService
   {
     private readonly VaultKeepsRepository _vkr;
+    private readonly VaultsRepository _vr;
 
-    public VaultKeepsService(VaultKeepsRepository vkr)
+    public VaultKeepsService(VaultKeepsRepository vkr, VaultsRepository vr)
     {
       _vkr = vkr;
+      _vr = vr;
     }
 
-    public List<VaultKeep> GetKeepsByVaultId(int vaultId)
+    public List<VaultKeepIdModel> GetKeepsByVaultId(int vaultId)
    {
+    var foundVault = _vr.GetById(vaultId);
+    if(foundVault.IsPrivate == true)
+    {
+      throw new Exception("Vault Is Private");
+    }
     return _vkr.GetKeepsByVaultId(vaultId);
   }
 
@@ -24,15 +31,18 @@ namespace Keepr.Services
       return _vkr.CreateVaultKeeps(data);
     }
 
-    public VaultKeep DeleteVaultKeeps(int vaultKeepId)
+    public void DeleteVaultKeeps(int vaultKeepId, string userId)
     {
-      VaultKeep vaultKeep = GetVaultKeep(vaultKeepId);
-     _vkr.Delete(vaultKeepId);
-     return vaultKeep;
+      var vaultKeep = GetVaultKeep(vaultKeepId);
+      if(vaultKeep.CreatorId != userId)
+      {
+        throw new Exception("You are not authorized!");
+      }
+      _vkr.Delete(vaultKeepId);
     }
     public VaultKeep GetVaultKeep(int vaultKeepId)
     {
-      VaultKeep vaultKeep = _vkr.GetVaultKeepById(vaultKeepId);
+      var vaultKeep = _vkr.GetVaultKeepById(vaultKeepId);
       if(vaultKeep == null)
       {
         throw new Exception("Invalid Id");

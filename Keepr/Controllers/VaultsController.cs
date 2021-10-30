@@ -46,12 +46,11 @@ namespace Keepr.Controllers
     }
 
     [HttpGet("{vaultId}/keeps")]
-    public ActionResult <List<VaultKeep>> GetKeepsByVaultId(int vaultId)
+    public ActionResult <List<VaultKeepIdModel>> GetKeepsByVaultId(int vaultId)
     {
       try
       {
-          List<VaultKeep> vk = _vks.GetKeepsByVaultId(vaultId);
-          return Ok(vk);
+          return _vks.GetKeepsByVaultId(vaultId);
       }
       catch (System.Exception e)
       {
@@ -88,7 +87,7 @@ namespace Keepr.Controllers
           data.Id = vaultId;
           Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
           data.CreatorId = userInfo.Id;
-          Vault updatedVault = _vaultsService.Edit(data);
+          var updatedVault = _vaultsService.Edit(data);
           return Ok(updatedVault);
       }
       catch (System.Exception e)
@@ -104,7 +103,7 @@ namespace Keepr.Controllers
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        Vault vault = _vaultsService.Delete(vaultId);
+        var vault = _vaultsService.Delete(vaultId);
         return Ok(vault);
 
       }

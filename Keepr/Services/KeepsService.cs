@@ -21,7 +21,7 @@ namespace Keepr.Services
 
     public Keep GetById(int keepId)
     {
-      Keep keep = _keepsRepository.GetById(keepId);
+      var keep = _keepsRepository.GetById(keepId);
       if(keep == null)
       {
         throw new Exception("invalid id");
@@ -36,7 +36,7 @@ namespace Keepr.Services
 
     public Keep Edit(Keep data)
     {
-      Keep keep = GetById(data.Id);
+      var keep = GetById(data.Id);
       keep.Name = data.Name ?? keep.Name;
       keep.Description = data.Description ?? keep.Description;
       keep.Img = data.Img ?? keep.Img;
@@ -46,7 +46,7 @@ namespace Keepr.Services
 
     public Keep Delete(int keepId)
     {
-      Keep keep = GetById(keepId);
+      var keep = GetById(keepId);
       _keepsRepository.Delete(keepId);
       return keep;
     }

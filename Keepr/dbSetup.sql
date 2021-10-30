@@ -60,5 +60,9 @@ UPDATE keeps
         2
           );
     
-
       SELECT * FROM vaultKeep;
+
+      SELECT *
+      FROM vaults v
+      JOIN accounts a ON v.creatorId = a.id;
+      WHERE v.creatorId = @profileId;

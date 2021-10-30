@@ -20,7 +20,7 @@ namespace Keepr.Services
     }
    public Vault GetById(int vaultId)
     {
-      Vault vault = _vaultsRepository.GetById(vaultId);
+      var vault = _vaultsRepository.GetById(vaultId);
       if(vault == null)
       {
         throw new Exception("Invalid Id");
@@ -35,7 +35,7 @@ namespace Keepr.Services
 
     public Vault Edit(Vault data)
     {
-      Vault vault = GetById(data.Id);
+      var vault = GetById(data.Id);
       vault.Name = data.Name ?? vault.Name;
       vault.Description = data.Description ?? data.Description;
       vault.IsPrivate = data.IsPrivate;
@@ -45,7 +45,7 @@ namespace Keepr.Services
 
     public Vault Delete(int vaultId)
     {
-      Vault vault = GetById(vaultId);
+      var vault = GetById(vaultId);
       _vaultsRepository.Delete(vaultId);
       return vault;
     }

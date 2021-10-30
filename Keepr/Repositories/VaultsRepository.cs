@@ -21,7 +21,7 @@ namespace Keepr.Repositories
       SELECT * 
       FROM vaults v
       JOIN accounts a on v.creatorId = a.id;";
-      return _db.Query<Vault, Account, Vault>(sql, (v, a) =>
+      return _db.Query<Vault, Profile, Vault>(sql, (v, a) =>
       {
         v.Creator = a;
         return v;
@@ -34,7 +34,7 @@ namespace Keepr.Repositories
       FROM vaults v
       JOIN accounts a on v.creatorId = a.id
       WHERE v.id = @vaultId;";
-      return _db.Query<Vault, Account, Vault>(sql, (v, a) =>
+      return _db.Query<Vault, Profile, Vault>(sql, (v, a) =>
       {
         v.Creator = a;
         return v;

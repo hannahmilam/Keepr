@@ -16,27 +16,29 @@ namespace Keepr.Repositories
       _db = db;
     }
 
-    public List<VaultKeep> GetKeepsByVaultId(int vaultId)
+    public List<VaultKeepIdModel> GetKeepsByVaultId(int vaultId)
     {
       string sql = @"
-      SELECT * 
+      SELECT
+      a.*,
+      k.*,
+      vk.id AS vaultKeepId
       FROM vaultKeep vk
-      JOIN accounts a on vk.creatorId = a.id
       JOIN keeps k on vk.keepId = k.id
+      JOIN accounts a on k.creatorId = a.id
       WHERE vk.vaultId = @vaultId;
       ";
-      return _db.Query<VaultKeep, Account, Keep, VaultKeep>(sql, (vk, a, k) =>
+      return _db.Query<Profile, VaultKeepIdModel, VaultKeepIdModel>(sql, (a, vk) =>
       {
-        vk.CreatorId = a.Id;
-        vk.KeepId = k.Id;
+        vk.Creator = a;
         return vk;
       }, new {vaultId}).ToList();
     }
 
-    public void Delete(int vaultKeepId)
+    public void Delete(int id)
     {
-      string sql = "DELETE * FROM vaultKeep WHERE id = @vaultKeepId LIMIT 1;";
-      var affectedRows = _db.Execute(sql, new {vaultKeepId});
+      string sql = "DELETE FROM vaultKeep WHERE id = @id LIMIT 1;";
+      var affectedRows = _db.Execute(sql, new {id});
       if(affectedRows == 0)
       {
         throw new Exception("unable to delete");
@@ -50,8 +52,8 @@ namespace Keepr.Repositories
       FROM vaultKeep vk
       JOIN accounts a on vk.creatorId = a.id
       JOIN keeps k on vk.keepId = k.id
-      WHERE vk.id = vaultKeepId;";
-      return _db.Query<VaultKeep, Account, Keep, VaultKeep>(sql, (vk, a, k) => 
+      WHERE vk.id = @vaultKeepId;";
+      return _db.Query<VaultKeep, Profile, Keep, VaultKeep>(sql, (vk, a, k) => 
       {
         vk.CreatorId = a.Id;
         vk.KeepId = k.Id;
