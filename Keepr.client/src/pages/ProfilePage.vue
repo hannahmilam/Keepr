@@ -1,11 +1,11 @@
 <template>
-<div class="container-fluid">
+<div class="container-fluid" v-if="profile != null">
   <div class="row">
     <div class="col-md-2">
-    <img :src="account.picture" height="90" class="rounded" alt="">
+    <img :src="profile?.picture" height="90" class="rounded" alt="">
     </div>
     <div class="col">
-      <h2>{{account.name}}</h2>
+      <h2>{{profile?.name}}</h2>
       <small>Vaults: {{vaults.length}}</small><br/>
       <small>Keeps: {{keeps.length}} </small>
     </div>
@@ -41,6 +41,7 @@ import { AppState } from '../AppState'
 import { onMounted } from '@vue/runtime-core'
 import { vaultsService } from '../services/VaultsService'
 import { keepsService } from '../services/KeepsService'
+import { profilesService } from '../services/ProfilesService'
 import { useRoute } from 'vue-router'
 export default {
   setup(){
@@ -48,11 +49,14 @@ export default {
     onMounted(() => {
       vaultsService.getVaultsByProfile(route.params.id)
       keepsService.getKeepsByProfile(route.params.id)
+      profilesService.getProfileById(route.params.id)
+      
     })
     return{
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      profile: computed(() => AppState.currentProfile)
     }
   }
 }

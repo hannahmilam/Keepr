@@ -1,5 +1,5 @@
 <template>
-<div class="grid-item my-3">
+<div class="grid-item my-3" v-if="keep != null">
   <div class="card p-0 m-0 selectable" data-bs-toggle="modal" data-bs-target="#keep-details" :style="{ 'backgroundImage': `url(${keep.img})` }">
     <div class="card-footer m-0 p-0">
       <div class="row mt-1 pb-1 justify-content-around">
