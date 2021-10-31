@@ -6,8 +6,12 @@
     <router-view />
   </main>
   <footer>
-    <div class="bg-dark text-light text-center p-4">
-      Made with 💖 by CodeWorks
+    <div class="bg-dark text-light d-flex justify-content-center p-4">
+      <div class="col-1 text-center">
+      <p class="action" @click="scrollToTop">
+        Back To Top
+      </p>
+      </div>
     </div>
   </footer>
 </template>
@@ -19,7 +23,10 @@ export default {
   name: 'App',
   setup() {
     return {
-      appState: computed(() => AppState)
+      appState: computed(() => AppState),
+      scrollToTop(){
+        window.scrollTo(0, 0);
+      }
     }
   }
 }
@@ -28,6 +35,11 @@ export default {
 @import "./assets/scss/main.scss";
 main{
 background-color: white;
+scroll-behavior: smooth;
+}
+p:hover{
+  border-bottom: solid white;
+  border-width: 1px;
 }
 
 </style>
