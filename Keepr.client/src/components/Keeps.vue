@@ -1,6 +1,5 @@
 <template>
-<div class="col-md-3 my-3">
-    
+<div class="grid-item my-3">
   <div class="card p-0 m-0 selectable" data-bs-toggle="modal" data-bs-target="#keep-details" :style="{ 'backgroundImage': `url(${keep.img})` }">
     <div class="card-footer m-0 p-0">
       <div class="row mt-1 pb-1 justify-content-around">
@@ -69,18 +68,12 @@ setup(){
   background-size: cover;
   border-radius: 12px; 
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
-
 }
 .card-footer{
   position: relative;
   bottom: -17rem;
   border: none;
   background-color: transparent;
-   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-
 }
 h3 {
   color: white;
