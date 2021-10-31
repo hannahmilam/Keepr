@@ -51,7 +51,7 @@
 
       <span class="navbar-text">
         <button
-          class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0"
+          class="btn selectable text-uppercase my-2 my-lg-0"
           @click="login"
           v-if="!user.isAuthenticated"
         >
@@ -71,7 +71,7 @@
               height="40"
               class="rounded"
             />
-            <span class="mx-3 text-success lighten-30">{{ user.name }}</span>
+            <span class="mx-3">{{ user.name }}</span>
           </div>
           <div
             class="dropdown-menu p-0 list-group w-100"
@@ -135,7 +135,7 @@ a:hover {
   text-transform: uppercase;
 }
 .navbar-nav .router-link-exact-active{
-  border-bottom: 2px solid var(--bs-success);
+  border-bottom: 2px solid var(--bs-black);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
