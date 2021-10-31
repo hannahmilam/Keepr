@@ -10,12 +10,14 @@ namespace Keepr.Services
     private readonly VaultKeepsRepository _vkr;
     private readonly VaultsRepository _vr;
     private readonly KeepsRepository _kr;
+    private readonly VaultsService _vs;
 
-    public VaultKeepsService(VaultKeepsRepository vkr, VaultsRepository vr, KeepsRepository kr)
+    public VaultKeepsService(VaultKeepsRepository vkr, VaultsRepository vr, KeepsRepository kr, VaultsService vs)
     {
       _vkr = vkr;
       _vr = vr;
       _kr = kr;
+      _vs = vs;
     }
 
     public List<VaultKeepIdModel> GetKeepsByVaultId(int vaultId)
@@ -28,9 +30,9 @@ namespace Keepr.Services
     return _vkr.GetKeepsByVaultId(vaultId);
   }
 
-    public VaultKeep CreateVaultKeeps(VaultKeep data)
+    public VaultKeep CreateVaultKeeps(VaultKeep data, string userId)
     {
-      var vault = _vr.GetById(data.VaultId);
+      var vault = _vs.GetById(data.VaultId, userId);
       if(vault.CreatorId != data.CreatorId)
       {
         throw new Exception("You're Not Authorized");
