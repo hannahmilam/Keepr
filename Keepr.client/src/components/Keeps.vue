@@ -4,7 +4,7 @@
     <div class="card-footer m-0 p-0">
       <div class="row mt-1 pb-1 justify-content-around">
       <div class="col-8">
-      <h3>{{keep.name}}</h3>
+      <h4 class="clip-text">{{keep.name}}</h4>
       </div>
       <div class="col-2">
         <router-link :to="{name: 'Profile', params: {id: keep.creator?.id}}" class="selectable">
@@ -56,7 +56,7 @@ setup(){
   border: none;
   background-color: transparent;
 }
-h3 {
+h4 {
   color: white;
   text-transform: uppercase;
   text-shadow: 0 1px 0 black;
