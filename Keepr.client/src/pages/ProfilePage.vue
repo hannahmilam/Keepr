@@ -12,8 +12,9 @@
   </div>
   <div class="row mt-5">
     <h3>Vaults <i class="mdi mdi-plus text-secondary action"></i></h3>
+  <Vaults v-for="v in vaults" :key="v.id" :vault="v"/>
   </div>
-  <div class="row">
+  <div class="row mt-5">
     <h3>Keeps <i class="mdi mdi-plus text-secondary action"></i></h3>
   </div>
   <div class="grid">
@@ -46,11 +47,11 @@ export default {
 </script>
 <style scoped>
 .grid{
-  column-width: 400px;
+  column-width: 300px;
   margin: 20px auto;
 }
 .grid-item { 
-  column-width: 100px;
+  column-width: 50px;
   width: 100%;
   height: 100%; 
   }
