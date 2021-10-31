@@ -4,7 +4,6 @@
       <Keeps v-for="k in keeps" :key="k.id" :keep="k"/>
   </div>
 </div>
-
 </template>
 
 <script>
