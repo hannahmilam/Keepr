@@ -1,5 +1,6 @@
 import { AppState } from "../AppState"
 import { Keep } from "../Models/Keep"
+import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
 class KeepsService{
@@ -10,6 +11,13 @@ class KeepsService{
     async getKeepById(keepId){
     const res = await api.get(`api/keeps/${keepId}`)
     AppState.keep = new Keep(res.data)
+    }
+
+    async getKeepsByProfile(profileId){
+      AppState.keeps = []
+      const res = await api.get(`api/profiles/${profileId}/keeps`)
+      logger.log(res)
+      AppState.keeps = res.data.map(k => new Keep(k))
     }
     
     async createKeep(keep){

@@ -15,6 +15,13 @@ const res = await api.get(`api/vaults/${vaultId}`)
 AppState.vault = new Vault(res.data)
 }
 
+async getVaultsByProfile(profileId){
+  AppState.vaults = []
+  const res = await api.get(`api/profiles/${profileId}/vaults`)
+  logger.log(res)
+  AppState.vaults = res.data.map(v => new Vault(v))
+}
+
 async createVault(vault){
 const res = await api.post('api/vaults', vault)
 AppState.vaults.push(new Vault(res.data))

@@ -22,7 +22,9 @@
           <i class="mdi mdi-delete"></i>
         </div>
         <div class="col-5 text-center m-0 p-0">
+          <router-link :to="{name: 'Profile', params: {id: keep.creator?.id}}" class="selectable">
           <img :src="keep.creator?.picture" height="40" class="rounded-circle" alt="">
+          </router-link>
           </div>
           </div>
         </div>

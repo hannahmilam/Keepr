@@ -1,9 +1,57 @@
 <template>
-  <p>testing from profile page</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1">
+    <img :src="account.picture" height="90" class="rounded" alt="">
+    </div>
+    <div class="col">
+      <h2>{{account.name}}</h2>
+      <small>Vaults: {{vaults.length}}</small><br/>
+      <small>Keeps: {{keeps.length}} </small>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <h3>Vaults <i class="mdi mdi-plus text-secondary action"></i></h3>
+  </div>
+  <div class="row">
+    <h3>Keeps <i class="mdi mdi-plus text-secondary action"></i></h3>
+  </div>
+  <div class="grid">
+    <Keeps v-for="k in keeps" :key="k.id" :keep="k"/>
+  </div>
+</div>
 </template>
 
 <script>
+import { computed } from '@vue/reactivity'
+import { AppState } from '../AppState'
+import { onMounted } from '@vue/runtime-core'
+import { vaultsService } from '../services/VaultsService'
+import { keepsService } from '../services/KeepsService'
+import { useRoute } from 'vue-router'
 export default {
-  name: 'ProfilePage'
+  setup(){
+    const route = useRoute()
+    onMounted(() => {
+      vaultsService.getVaultsByProfile(route.params.id)
+      keepsService.getKeepsByProfile(route.params.id)
+    })
+    return{
+      account: computed(() => AppState.account),
+      vaults: computed(() => AppState.vaults),
+      keeps: computed(() => AppState.keeps)
+    }
+  }
 }
 </script>
+<style scoped>
+.grid{
+  column-width: 400px;
+  margin: 20px auto;
+}
+.grid-item { 
+  column-width: 100px;
+  width: 100%;
+  height: 100%; 
+  }
+</style>

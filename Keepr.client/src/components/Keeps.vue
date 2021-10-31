@@ -7,7 +7,9 @@
       <h3>{{keep.name}}</h3>
       </div>
       <div class="col-2">
+        <router-link :to="{name: 'Profile', params: {id: keep.creator?.id}}" class="selectable">
         <img :src="keep.creator?.picture" class="rounded-circle" height="35" alt="">
+        </router-link>
       </div>
       </div>
     </div>
