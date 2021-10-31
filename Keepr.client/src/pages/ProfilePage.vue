@@ -1,7 +1,7 @@
 <template>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-1">
+    <div class="col-md-2">
     <img :src="account.picture" height="90" class="rounded" alt="">
     </div>
     <div class="col">
@@ -11,16 +11,28 @@
     </div>
   </div>
   <div class="row mt-5">
-    <h3>Vaults <i class="mdi mdi-plus text-secondary action"></i></h3>
+    <h3>Vaults <i class="mdi mdi-plus text-secondary action" data-bs-toggle="modal" data-bs-target="#vault-form"></i></h3>
   <Vaults v-for="v in vaults" :key="v.id" :vault="v"/>
   </div>
   <div class="row mt-5">
-    <h3>Keeps <i class="mdi mdi-plus text-secondary action"></i></h3>
+    <h3>Keeps <i class="mdi mdi-plus text-secondary action" data-bs-toggle="modal" data-bs-target="#keep-form"></i></h3>
   </div>
   <div class="grid">
     <Keeps v-for="k in keeps" :key="k.id" :keep="k"/>
   </div>
 </div>
+
+<Modal id="vault-form">
+    <template #modal-body>
+      <VaultForm />
+    </template>
+  </Modal>
+
+<Modal id="keep-form">
+    <template #modal-body>
+      <KeepForm/>
+    </template>
+  </Modal>
 </template>
 
 <script>
