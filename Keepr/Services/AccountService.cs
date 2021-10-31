@@ -13,7 +13,7 @@ namespace Keepr.Services
         }
 
         internal string GetProfileEmailById(string id)
-        {
+        { 
             return _repo.GetById(id).Email;
         }
         internal Account GetProfileByEmail(string email)
@@ -48,10 +48,16 @@ namespace Keepr.Services
             return _repo.GetUsersKeeps(profileId);
             }
 
-            public List<Vault> GetUsersVaults(string profileId)
+            public List<Vault> GetUsersVaults(string profileId, string userId)
             {
                 var vaults = _repo.GetUsersVaults(profileId);
-                return vaults;
+                if(profileId != userId)
+                {
+                    var publicVaults = vaults.FindAll(v => v.IsPrivate == false);
+                    return publicVaults;
+                } else {
+                   return vaults;
                 }
             }
-          }
+        }
+    }
