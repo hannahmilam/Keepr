@@ -28,20 +28,15 @@ namespace Keepr.Controllers
       {
           Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
           data.CreatorId = userInfo.Id;
-          var getVault = _vs.GetById(data.VaultId, userInfo.Id);
-          if(getVault.CreatorId != userInfo.Id)
-          {
-            return BadRequest("You Are Not Authorized");
-          }
-            data.CreatorId = userInfo.Id;
-          var createdVault = _vks.CreateVaultKeeps(data, userInfo.Id);
-          return Ok(createdVault);
+          var createdVaultKeep = _vks.CreateVaultKeeps(data);
+          return Ok(createdVaultKeep);
       }
       catch (Exception e)
       {
         return BadRequest(e.Message);
       }
     }
+    
     [Authorize]
     [HttpDelete("{vaultKeepId}")]
     public async Task<ActionResult<String>> DeleteVaultKeeps(int vaultKeepId)
