@@ -43,6 +43,8 @@ CREATE TABLE IF NOT EXISTS vaultKeep(
 ) default charset utf8 COMMENT '';
 
 SELECT * FROM keeps;
+SELECT * FROM vaults;
+SELECT * FROM vaultKeep;
 UPDATE keeps
         SET
           name = 'Test',
