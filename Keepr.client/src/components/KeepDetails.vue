@@ -84,7 +84,6 @@ props: {
       },
       async createVaultKeep(vaultId, keepId){
         try {
-          debugger
           if(await Pop.confirm()) {
             const modal = Modal.getOrCreateInstance(document.getElementById(`keep-details-${props.keep.id}`))
             modal.hide()

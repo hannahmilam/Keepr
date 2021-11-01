@@ -1,6 +1,6 @@
 <template>
 <div class="grid-item my-3" v-if="vault != null">
-  <!-- <router-link :to="{name: 'Vault', params: {vaultId: vault.id}}" class="selectable"> -->
+  <router-link :to="{name: 'Vault', params: {vaultId: vault.id}}" class="selectable">
   <div class="card p-0 m-0 selectable">
     <div class="card-body m-0 p-0">
     <img :src="vault.img" class="card-img" loading="lazy" alt="vault image">
@@ -10,7 +10,7 @@
        <p class="ms-2">{{vault.description}}</p>
     </div>
   </div>
-  <!-- </router-link> -->
+  </router-link>
 </div>
 
 </template>

@@ -6,10 +6,12 @@ import { api } from "./AxiosService"
 
 class KeepsService{
   async getKeeps(){
+    AppState.keeps = []
     const res = await api.get('api/keeps')
     AppState.keeps = res.data.map(k => new Keep(k))
     }
     async getKeepById(keepId){
+    AppState.keep = []
     const res = await api.get(`api/keeps/${keepId}`)
     AppState.keep = new Keep(res.data)
     }
@@ -18,6 +20,12 @@ class KeepsService{
       AppState.keeps = []
       const res = await api.get(`api/profiles/${profileId}/keeps`)
       AppState.keeps = res.data.map(k => new Keep(k))
+    }
+    
+    async getKeepsByVaultId(vaultId){
+      const res = await api.get(`api/vaults/${vaultId}/keeps`)
+      AppState.keeps = res.data.map(k => new Keep(k))
+      logger.log('get keeps by vault id', AppState.keeps)
     }
     
     async createKeep(keep){
@@ -31,7 +39,7 @@ class KeepsService{
       vaultKeep.keepId = keepId
       const res = await api.post('api/vaultkeeps', vaultKeep)
       AppState.vaultKeeps.push(new VaultKeep(res.data))
-      logger.log('create vault keep res.data', res.data)
+      logger.log('create vault keep res.data', AppState.vaultKeeps)
     }
     
     async editKeep(keep){

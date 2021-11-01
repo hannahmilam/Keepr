@@ -63,7 +63,7 @@ export default {
 </script>
 <style scoped>
 .grid{
-   columns: 4 200px;
+  columns: 4 200px;
   column-gap: 1rem;
   flex-wrap: wrap;
   flex-direction: column;

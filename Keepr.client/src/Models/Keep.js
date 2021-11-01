@@ -9,5 +9,6 @@ this.views = data.views
 this.shares = data.shares
 this.keeps = data.keeps
 this.creator = data.creator || {}
+this.vaultKeepId = data.vaultKeepId
 }
 }

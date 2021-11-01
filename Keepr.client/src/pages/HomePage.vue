@@ -26,7 +26,7 @@ export default {
 
 <style scoped lang="scss">
 .grid{
-   columns: 4 200px;
+  columns: 4 200px;
   column-gap: 1rem;
   flex-wrap: wrap;
   flex-direction: column;
