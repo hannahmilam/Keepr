@@ -19,7 +19,7 @@
         <button class="btn btn-outline-info m-0 px-1"><small>ADD TO VAULT</small></button>
         </div>
         <div class="col-1 text-center m-0 p-0" v-if="keep.creatorId === account.id">
-          <i class="mdi mdi-delete"></i>
+          <i class="mdi mdi-delete selectable" @click="deleteKeep(keep.id)"></i>
         </div>
         <div class="col-5 text-center m-0 p-0">
           <!-- <router-link :to="{name: 'Profile', params: {profileId: keep.creator?.id}}" class="selectable"> -->
@@ -39,6 +39,9 @@ import { Keep } from '../Models/Keep'
 import { useRoute } from 'vue-router'
 import { router } from '../router'
 import { Modal } from 'bootstrap'
+import { keepsService } from '../services/KeepsService'
+import Pop from '../utils/Pop'
+import { logger } from '../utils/Logger'
 export default {
 props: {
   keep: {
@@ -54,6 +57,19 @@ props: {
        const modal = Modal.getInstance(document.getElementById(`keep-details-${keep.id}`))
         modal.hide()
         router.push({ name: 'Profile', params: { profileId: props.keep.creatorId}})
+      },
+      async deleteKeep(keepId){
+        try {
+          if(await Pop.confirm()){
+            const modal = Modal.getOrCreateInstance(document.getElementById(`keep-details-${keepId}`))
+            modal.hide()
+            await keepsService.deleteKeep(keepId)
+            Pop.toast('Keep Deleted')
+          }
+        } catch (error) {
+          Pop.toast(error.message, 'error')
+          logger.log('ERROR_DELETING_KEEP', error.message)
+        }
       }
 
     }
