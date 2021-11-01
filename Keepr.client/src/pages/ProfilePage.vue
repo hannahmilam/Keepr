@@ -54,8 +54,8 @@ export default {
     })
     return{
       account: computed(() => AppState.account),
-      vaults: computed(() => AppState.vaults),
-      keeps: computed(() => AppState.keeps),
+      vaults: computed(() => AppState.vaults.filter(v => v.creator.id === route.params.profileId)),
+      keeps: computed(() => AppState.keeps.filter(k => k.creator.id === route.params.profileId)),
       profile: computed(() => AppState.currentProfile)
     }
   }

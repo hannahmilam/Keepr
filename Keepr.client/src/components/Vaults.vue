@@ -1,5 +1,20 @@
 <template>
-<div class="grid-item my-3" v-if="vault != null">
+<div class="grid-item my-3" v-if="vault.creatorId !== account.id">
+  <router-link :to="{name: 'Vault', params: {vaultId: vault.id}}" class="selectable" v-if="vault.isPrivate === false">
+  <div class="card p-0 m-0 selectable">
+    <i class="mdi mdi-lock" v-if="vault.isPrivate === true"></i>
+    <div class="card-body m-0 p-0">
+    <img :src="vault.img" class="card-img" loading="lazy" alt="vault image">
+    </div>
+    <div class="card-footer m-0 p-0 clip-text">
+       <h4 class="ms-2">{{vault.name}}</h4>
+       <p class="ms-2">{{vault.description}}</p>
+    </div>
+  </div>
+  </router-link>
+</div>
+
+<div class="grid-item my-3" v-if="vault.creatorId === account.id">
   <router-link :to="{name: 'Vault', params: {vaultId: vault.id}}" class="selectable">
   <div class="card p-0 m-0 selectable">
     <i class="mdi mdi-lock" v-if="vault.isPrivate === true"></i>
@@ -30,7 +45,8 @@ export default {
   setup(){
     return{
       vaultKeep: computed(() => AppState.vaultKeeps),
-      keeps: computed(() => AppState.keeps.filter(k => k.id === AppState.vaultKeep.keepId))
+      keeps: computed(() => AppState.keeps.filter(k => k.id === AppState.vaultKeep.keepId)),
+      account: computed(() => AppState.account)
     }
   }
 
