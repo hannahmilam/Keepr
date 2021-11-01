@@ -12,11 +12,15 @@
           </div>
         <h2 class="text-center">{{keep.name}}</h2>
         <p class="mx-3">{{keep.description}}</p>
-
       <div class="row mb-2 justify-content-around">
       
         <div class="col-5 text-center m-0 p-0">
-        <button class="btn btn-outline-info m-0 px-1"><small>ADD TO VAULT</small></button>
+          <div class="input-group mb-3">
+        <button class="btn btn-outline-info dropdown-toggle m-0 px-1" data-bs-toggle="dropdown" aria-expanded="false"><small>ADD TO VAULT</small></button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#" v-for="v in vaults" :key="v.id" :vaults="v">{{v.name}}</a></li>
+          </ul>
+        </div>
         </div>
         <div class="col-1 text-center m-0 p-0" v-if="keep.creatorId === account.id">
           <i class="mdi mdi-delete selectable" @click="deleteKeep(keep.id)"></i>
@@ -26,8 +30,9 @@
           <img :src="keep.creator?.picture" height="40" class="rounded-circle action" alt="" @click="goToProfile">
           <!-- </router-link> -->
           </div>
-          </div>
+          
         </div>
+      </div>
       </div>
 
 </template>
@@ -42,6 +47,8 @@ import { Modal } from 'bootstrap'
 import { keepsService } from '../services/KeepsService'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
+import { onMounted } from '@vue/runtime-core'
+import { vaultsService } from '../services/VaultsService'
 export default {
 props: {
   keep: {
@@ -50,9 +57,13 @@ props: {
   }
 },
   setup(props){
+    onMounted(() => {
+      vaultsService.getVaults()
+    })
     return{
       props,
       account: computed(() => AppState.account),
+      vaults: computed(() => AppState.vaults.filter(v => v.creator.id === AppState.account.id)),
       goToProfile() {
        const modal = Modal.getInstance(document.getElementById(`keep-details-${props.keep.id}`))
         modal.hide()
