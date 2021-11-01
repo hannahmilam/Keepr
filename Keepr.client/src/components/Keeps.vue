@@ -1,5 +1,5 @@
 <template>
-<div class="grid-item my-3" v-if="keep != null">
+<div class="grid-item my-3" v-if="keep !== null">
   <div class="card p-0 m-0 selectable">
     <div class="card-body m-0 p-0 selectable " data-bs-toggle="modal" :data-bs-target="'#keep-details-'+keep.id">
       <img :src="keep.img" class="card-img" loading="lazy" alt="keep image">

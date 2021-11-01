@@ -6,7 +6,8 @@
     </div>
     <div class="col">
       <h2>{{profile?.name}}</h2>
-      <small>Vaults: {{vaults.length}}</small><br/>
+      <small>Vaults: {{vaults.length}}</small>
+      <br/>
       <small>Keeps: {{keeps.length}} </small>
     </div>
   </div>
@@ -54,8 +55,8 @@ export default {
     })
     return{
       account: computed(() => AppState.account),
-      vaults: computed(() => AppState.vaults.filter(v => v.creator.id === route.params.profileId)),
-      keeps: computed(() => AppState.keeps.filter(k => k.creator.id === route.params.profileId)),
+      keeps: computed(() => AppState.keeps),
+      vaults: computed(() => AppState.vaults),
       profile: computed(() => AppState.currentProfile)
     }
   }

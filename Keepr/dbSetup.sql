@@ -43,7 +43,11 @@ CREATE TABLE IF NOT EXISTS vaultKeep(
 ) default charset utf8 COMMENT '';
 
 SELECT * FROM keeps;
+SELECT * FROM keeps WHERE creatorId = '617320aa2611f06ab4856363';
+SELECT * FROM keeps WHERE creatorId = '6144d914509d05dc1e375612';
 SELECT * FROM vaults;
+SELECT * FROM vaults WHERE creatorId = '617320aa2611f06ab4856363';
+SELECT * FROM vaults WHERE creatorId = '6144d914509d05dc1e375612';
 SELECT * FROM vaultKeep;
 UPDATE keeps
         SET

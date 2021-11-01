@@ -19,6 +19,7 @@ async getVaultById(vaultId){
 async getVaultsByProfile(profileId){
   const res = await api.get(`api/profiles/${profileId}/vaults`)
   AppState.vaults = res.data.map(v => new Vault(v))
+  logger.log('get vaults by profile', AppState.vaults)
 }
 
 async createVault(vault){
