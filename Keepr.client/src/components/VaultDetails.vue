@@ -9,7 +9,7 @@
 </div>
 </div>
 <div class="grid">
-  <Keeps v-for="k in keeps" :key="k.id" :keep="k" />
+  <VaultKeeps v-for="k in keeps" :key="k.id" :keep="k" />
 </div>
 </template>
 

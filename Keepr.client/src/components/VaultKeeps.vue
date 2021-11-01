@@ -1,7 +1,7 @@
 <template>
 <div class="grid-item my-3" v-if="keep != null">
   <div class="card p-0 m-0 selectable">
-    <div class="card-body m-0 p-0 selectable " data-bs-toggle="modal" :data-bs-target="'#keep-details-'+keep.id">
+    <div class="card-body m-0 p-0 selectable " data-bs-toggle="modal" :data-bs-target="'#vaultkeep-details-'+keep.id">
       <img :src="keep.img" class="card-img" loading="lazy" alt="keep image">
     </div>
     <div class="card-footer m-0 p-0">
@@ -17,13 +17,11 @@
     </div>
   </div>
 
-
-<Modal :id="'keep-details-'+keep.id">
+<Modal :id="'vaultkeep-details-'+keep.id">
     <template #modal-body>
-      <KeepDetails :keep="keep"/>
+      <VaultKeepDetails :keep="keep"/>
     </template>
   </Modal>
-
 </template>
 
 <script>

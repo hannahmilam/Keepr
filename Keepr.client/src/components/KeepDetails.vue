@@ -14,9 +14,10 @@
         <p class="mx-3">{{keep.description}}</p>
       <div class="row mb-2 justify-content-around">
       
+        
         <div class="col-5 text-center m-0 p-0">
           <div class="input-group mb-3">
-        <button class="btn btn-outline-info dropdown-toggle m-0 px-1" data-bs-toggle="dropdown" aria-expanded="false"><small>ADD TO VAULT</small></button>
+        <button class="btn btn-outline-info dropdown-toggle m-0 px-1" data-bs-toggle="dropdown" aria-expanded="false"><small>Add To Vault</small></button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#" v-for="v in vaults" :key="v.id" :vaults="v" @click="createVaultKeep(v.id, keep.id)">{{v.name}}</a></li>
           </ul>
@@ -26,9 +27,7 @@
           <i class="mdi mdi-delete selectable" @click="deleteKeep(keep.id)"></i>
         </div>
         <div class="col-5 text-center m-0 p-0">
-          <!-- <router-link :to="{name: 'Profile', params: {profileId: keep.creator?.id}}" class="selectable"> -->
           <img :src="keep.creator?.picture" height="40" class="rounded-circle action" alt="" @click="goToProfile">
-          <!-- </router-link> -->
           </div>
           
         </div>
