@@ -22,9 +22,9 @@
           <i class="mdi mdi-delete"></i>
         </div>
         <div class="col-5 text-center m-0 p-0">
-          <router-link :to="{name: 'Profile', params: {id: keep.creator?.id}}" class="selectable">
-          <img :src="keep.creator?.picture" height="40" class="rounded-circle" alt="">
-          </router-link>
+          <!-- <router-link :to="{name: 'Profile', params: {profileId: keep.creator?.id}}" class="selectable"> -->
+          <img :src="keep.creator?.picture" height="40" class="rounded-circle action" alt="" @click="goToProfile">
+          <!-- </router-link> -->
           </div>
           </div>
         </div>
@@ -36,6 +36,9 @@
 import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { Keep } from '../Models/Keep'
+import { useRoute } from 'vue-router'
+import { router } from '../router'
+import { Modal } from 'bootstrap'
 export default {
 props: {
   keep: {
@@ -43,9 +46,15 @@ props: {
     default: () => {return new Keep()}
   }
 },
-  setup(){
+  setup(props){
     return{
-      account: computed(() => AppState.account)
+      props,
+      account: computed(() => AppState.account),
+      goToProfile() {
+        const modal = Modal.getInstance(document.getElementById('keep-details'))
+        modal.hide()
+        router.push({ name: 'Profile', params: { profileId: props.keep.creatorId}})
+      }
 
     }
   }

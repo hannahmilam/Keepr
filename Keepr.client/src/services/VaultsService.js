@@ -25,6 +25,7 @@ async getVaultsByProfile(profileId){
 async createVault(vault){
 const res = await api.post('api/vaults', vault)
 AppState.vaults.push(new Vault(res.data))
+logger.log('create vault', res.data)
 return res.data.id
 }
 

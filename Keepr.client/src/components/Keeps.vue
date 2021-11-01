@@ -1,15 +1,16 @@
 <template>
 <div class="grid-item my-3" v-if="keep != null">
-  <div class="card p-0 m-0 selectable" data-bs-toggle="modal" data-bs-target="#keep-details" :style="{ 'backgroundImage': `url(${keep.img})` }">
+  <div class="card p-0 m-0 selectable" :style="{ 'backgroundImage': `url(${keep.img})` }">
+    <div class="card-body selectable " data-bs-toggle="modal" data-bs-target="#keep-details"></div>
     <div class="card-footer m-0 p-0">
       <div class="row mt-1 pb-1 justify-content-around">
       <div class="col-8">
       <h4 class="clip-text">{{keep.name}}</h4>
       </div>
       <div class="col-2">
-        <router-link :to="{name: 'Profile', params: {id: keep.creator?.id}}" class="selectable">
-        <img :src="keep.creator?.picture" class="rounded-circle" height="35" alt="">
-        </router-link>
+        <!-- <router-link :to="{name: 'Profile', params: {profileId: keep.creator?.id}}" class="selectable"> -->
+        <img :src="keep.creator?.picture" class="rounded-circle action" height="35" alt="" @click="goToProfile">
+        <!-- </router-link> -->
       </div>
       </div>
     </div>
@@ -28,6 +29,8 @@
 import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { Keep } from '../Models/Keep'
+import { Modal } from 'bootstrap'
+import { router } from '../router'
 export default {
   props: {
     keep: { 
@@ -35,9 +38,13 @@ export default {
       default: () => { return new Keep()}
     }
   },
-setup(){
+setup(props){
   return{
-
+        goToProfile() {
+          const modal = Modal.getOrCreateInstance(document.getElementById('keep-details'))
+          modal.hide()
+          router.push({ name: 'Profile', params: { profileId: props.keep.creatorId}})
+      }
   }
 }
 }
@@ -51,9 +58,8 @@ setup(){
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
 }
 .card-footer{
-  position: relative;
-  bottom: -17rem;
   border: none;
+  backdrop-filter: blur(12px);
   background-color: transparent;
 }
 h4 {

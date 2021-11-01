@@ -1,5 +1,5 @@
 <template>
-<div class="container-fluid" v-if="profile != null">
+<div class="container-fluid" v-if="keeps">
   <div class="row">
     <div class="col-md-2">
     <img :src="profile?.picture" height="90" class="rounded" alt="">
@@ -47,9 +47,9 @@ export default {
   setup(){
     const route = useRoute()
     onMounted(() => {
-      vaultsService.getVaultsByProfile(route.params.id)
-      keepsService.getKeepsByProfile(route.params.id)
-      profilesService.getProfileById(route.params.id)
+      vaultsService.getVaultsByProfile(route.params.profileId)
+      keepsService.getKeepsByProfile(route.params.profileId)
+      profilesService.getProfileById(route.params.profileId)
       
     })
     return{
