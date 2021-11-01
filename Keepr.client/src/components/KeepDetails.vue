@@ -18,7 +18,7 @@
         <div class="col-5 text-center m-0 p-0">
         <button class="btn btn-outline-info m-0 px-1"><small>ADD TO VAULT</small></button>
         </div>
-        <div class="col-1 text-center m-0 p-0" v-if="keep.creatorId = account.id">
+        <div class="col-1 text-center m-0 p-0" v-if="keep.creatorId === account.id">
           <i class="mdi mdi-delete"></i>
         </div>
         <div class="col-5 text-center m-0 p-0">
@@ -51,7 +51,7 @@ props: {
       props,
       account: computed(() => AppState.account),
       goToProfile() {
-        const modal = Modal.getInstance(document.getElementById('keep-details'))
+       const modal = Modal.getInstance(document.getElementById(`keep-details-${keep.id}`))
         modal.hide()
         router.push({ name: 'Profile', params: { profileId: props.keep.creatorId}})
       }

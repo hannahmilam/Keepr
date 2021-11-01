@@ -1,7 +1,7 @@
 <template>
 <div class="grid-item my-3" v-if="keep != null">
   <div class="card p-0 m-0 selectable" :style="{ 'backgroundImage': `url(${keep.img})` }">
-    <div class="card-body selectable " data-bs-toggle="modal" data-bs-target="#keep-details"></div>
+    <div class="card-body selectable " data-bs-toggle="modal" :data-bs-target="'#keep-details-'+keep.id"></div>
     <div class="card-footer m-0 p-0">
       <div class="row mt-1 pb-1 justify-content-around">
       <div class="col-8">
@@ -18,7 +18,7 @@
   </div>
 
 
-<Modal id="keep-details">
+<Modal :id="'keep-details-'+keep.id">
     <template #modal-body>
       <KeepDetails :keep="keep"/>
     </template>
