@@ -1,6 +1,6 @@
 <template>
 <div class="container-fluid" v-if="keeps">
-  <div class="row">
+  <div class="row mb-5">
     <div class="col-md-2">
     <img :src="profile?.picture" height="90" class="rounded" alt="">
     </div>
@@ -10,13 +10,13 @@
       <small>Keeps: {{keeps.length}} </small>
     </div>
   </div>
-  <div class="row mt-5">
     <h3>Vaults <i class="mdi mdi-plus text-secondary action" data-bs-toggle="modal" data-bs-target="#vault-form"></i></h3>
+  <div class="grid">
   <Vaults v-for="v in vaults" :key="v.id" :vault="v"/>
   </div>
-  <div class="row mt-5">
+
+
     <h3>Keeps <i class="mdi mdi-plus text-secondary action" data-bs-toggle="modal" data-bs-target="#keep-form"></i></h3>
-  </div>
   <div class="grid">
     <Keeps v-for="k in keeps" :key="k.id" :keep="k"/>
   </div>
@@ -63,12 +63,9 @@ export default {
 </script>
 <style scoped>
 .grid{
-  column-width: 300px;
-  margin: 20px auto;
+   columns: 4 200px;
+  column-gap: 1rem;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
-.grid-item { 
-  column-width: 50px;
-  width: 100%;
-  height: 100%; 
-  }
 </style>

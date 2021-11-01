@@ -26,11 +26,9 @@ export default {
 
 <style scoped lang="scss">
 .grid{
-  column-width: 250px;
+   columns: 4 200px;
+  column-gap: 1rem;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
-.grid-item { 
-  column-width: 100px;
-  width: 80px;
-  height: 100%; 
-  }
 </style>
