@@ -54,7 +54,7 @@ props: {
       props,
       account: computed(() => AppState.account),
       goToProfile() {
-       const modal = Modal.getInstance(document.getElementById(`keep-details-${keep.id}`))
+       const modal = Modal.getInstance(document.getElementById(`keep-details-${props.keep.id}`))
         modal.hide()
         router.push({ name: 'Profile', params: { profileId: props.keep.creatorId}})
       },

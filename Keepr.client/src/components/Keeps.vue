@@ -41,7 +41,7 @@ export default {
 setup(props){
   return{
         goToProfile() {
-          const modal = Modal.getOrCreateInstance(document.getElementById('keep-details'))
+          const modal = Modal.getOrCreateInstance(document.getElementById(`keep-details-${props.keep.id}`))
           modal.hide()
           router.push({ name: 'Profile', params: { profileId: props.keep.creatorId}})
       }
