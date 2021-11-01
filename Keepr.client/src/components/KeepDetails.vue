@@ -18,7 +18,7 @@
           <div class="input-group mb-3">
         <button class="btn btn-outline-info dropdown-toggle m-0 px-1" data-bs-toggle="dropdown" aria-expanded="false"><small>ADD TO VAULT</small></button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#" v-for="v in vaults" :key="v.id" :vaults="v">{{v.name}}</a></li>
+          <li><a class="dropdown-item" href="#" v-for="v in vaults" :key="v.id" :vaults="v" @click="createVaultKeep(v.id, keep.id)">{{v.name}}</a></li>
           </ul>
         </div>
         </div>
@@ -80,6 +80,20 @@ props: {
         } catch (error) {
           Pop.toast(error.message, 'error')
           logger.log('ERROR_DELETING_KEEP', error.message)
+        }
+      },
+      async createVaultKeep(vaultId, keepId){
+        try {
+          debugger
+          if(await Pop.confirm()) {
+            const modal = Modal.getOrCreateInstance(document.getElementById(`keep-details-${props.keep.id}`))
+            modal.hide()
+            await keepsService.createVaultKeep(vaultId, keepId)
+            Pop.toast('keep added to vault', 'success')
+          }
+        } catch (error) {
+          Pop.toast(error.message, 'error')
+          logger.log('CREATE_VAULT_KEEP_ERROR', error.message)
         }
       }
 
