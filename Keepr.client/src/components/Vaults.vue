@@ -6,8 +6,8 @@
     <img :src="vault.img" class="card-img" loading="lazy" alt="vault image">
     </div>
     <div class="card-footer m-0 p-0 clip-text">
-       <h4>{{vault.name}}</h4>
-       <p>{{vault.description}}</p>
+       <h4 class="ms-2">{{vault.name}}</h4>
+       <p class="ms-2">{{vault.description}}</p>
     </div>
   </div>
   <!-- </router-link> -->
