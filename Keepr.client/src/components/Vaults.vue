@@ -2,6 +2,7 @@
 <div class="grid-item my-3" v-if="vault != null">
   <router-link :to="{name: 'Vault', params: {vaultId: vault.id}}" class="selectable">
   <div class="card p-0 m-0 selectable">
+    <i class="mdi mdi-lock" v-if="vault.isPrivate === true"></i>
     <div class="card-body m-0 p-0">
     <img :src="vault.img" class="card-img" loading="lazy" alt="vault image">
     </div>
@@ -72,5 +73,12 @@ p {
   text-transform: uppercase;
   text-shadow: 0 1px 0 black;
   border-radius: 12px; 
+}
+i{
+  position: absolute;
+  top: 0;
+  color: black;
+  margin-left: 1rem;
+  margin-top: 1rem;
 }
 </style>
