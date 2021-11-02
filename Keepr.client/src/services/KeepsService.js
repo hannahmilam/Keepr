@@ -58,5 +58,11 @@ class KeepsService{
       const res = await api.delete(`api/vaultkeeps/${vaultKeepId}`)
       AppState.vaultKeeps = AppState.vaultKeeps.filter(v => v.id !== vaultKeepId)
     }
+
+    async searchKeeps(query = {}){
+      const res = await api.get(`api/keeps/?query=${query}`)
+      logger.log('keeps query', res)
+      AppState.keeps = res.data.map(k => new Keep(k))
+    }
 }
 export const keepsService = new KeepsService();

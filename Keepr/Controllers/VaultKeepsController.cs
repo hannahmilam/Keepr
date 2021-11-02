@@ -14,13 +14,15 @@ namespace Keepr.Controllers
   {
     private readonly VaultKeepsService _vks;
     private readonly VaultsService _vs;
+    private readonly KeepsService _ks;
 
-    public VaultKeepsController(VaultKeepsService vks, VaultsService vs)
+    public VaultKeepsController(VaultKeepsService vks, VaultsService vs, KeepsService ks)
     {
       _vks = vks;
       _vs = vs;
+      _ks = ks;
     }
-    
+
     [Authorize]
     [HttpPost]
     public async Task<ActionResult<VaultKeep>> CreateVaultKeeps([FromBody] VaultKeep data)

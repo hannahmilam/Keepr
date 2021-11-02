@@ -30,7 +30,7 @@
 <ul class="navbar-nav me-auto">
        <li>
           <div>
-    <form @submit.prevent="findKeepsByQuery()" class="bg-white rounded elevation-1">
+    <form @submit.prevent="findKeepsByQuery" class="bg-white rounded elevation-1">
       <div class="form-group d-flex align-items-center">
         <label for="search" class="sr-only"></label>
         <input v-model="query"
@@ -99,16 +99,29 @@
 <script>
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { keepsService } from '../services/KeepsService'
+import Pop from '../utils/Pop'
+import { vaultsService } from '../services/VaultsService'
 export default {
   setup() {
+       const query = ref('')
     return {
+      query,
       user: computed(() => AppState.user),
       async login() {
         AuthService.loginWithPopup()
       },
       async logout() {
         AuthService.logout({ returnTo: window.location.origin })
+      },
+      async findKeepsByQuery(){
+        try {
+          await keepsService.searchKeeps(query.value)
+          await vaultsService.searchVaults(query.value)
+        } catch (error) {
+          Pop.toast(error.message, 'error')
+        }
       }
     }
   }

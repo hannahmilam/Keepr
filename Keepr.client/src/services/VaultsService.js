@@ -38,6 +38,11 @@ async deleteVault(vaultId){
 const res = await api.delete(`api/vaults/${vaultId}`)
 AppState.vaults = AppState.vaults.filter(v => v.id !== vaultId)
 }
+async searchVaults(query = {}){
+  const res = await api.get(`api/vaults/?query=${query}`)
+  logger.log('vaults query', res)
+  AppState.vaults = res.data.map(v => new Vault(v))
+}
 }
 
 export const vaultsService = new VaultsService()

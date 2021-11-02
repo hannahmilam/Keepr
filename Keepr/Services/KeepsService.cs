@@ -26,6 +26,7 @@ namespace Keepr.Services
       {
         throw new Exception("invalid id");
       }
+      keep.Views++;
       return keep;
     }
 
