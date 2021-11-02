@@ -12,15 +12,21 @@
         </div>
           </div>
 
-          <div class="row justify-content-around mt-4">
-            <div class="col-1 text-center ms-3">
-              <h5><i class="mdi mdi-eye"></i></h5>
+          <div class="row justify-content-center mt-4">
+            <div class="col-1 ms-3 text-center">
+             <i class="mdi mdi-eye"> </i>
+            </div>
+            <div class="col-1">
+              <span> {{keep.views}} </span>
             </div>
             <div class="col-1 text-center">
-              <h5><i class="mdi mdi-alpha-k-box-outline"></i></h5>
+             <i class="mdi mdi-alpha-k-box-outline"></i>
             </div>
-            <div class="col-1 me-5 text-center">
-               <h5><i class="mdi mdi-share-variant"></i></h5>
+            <div class="col-1">
+              <span> {{keep.keeps}} </span>
+            </div>
+            <div class="col-1 me-3 text-center">
+              <i class="mdi mdi-share-variant"></i>
             </div>
           </div>
 
@@ -30,9 +36,9 @@
         </div>
         
       <div class="card-footer mb-0 p-0 bg-transparent my-2 justify-content-around">
-        <div class="row justify-content-between m-0 p-0">
-        <div class="col-5 text-center p-0">
-          <div class="input-group mb-3">
+        <div class="row justify-content-center m-0 p-0">
+        <div class="col-5 p-0">
+          <div class="input-group  mb-3">
         <button class="btn btn-outline-info dropdown-toggle m-0 px-1" data-bs-toggle="dropdown" aria-expanded="false"><small>Add To Vault</small></button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#" v-for="v in vaults" :key="v.id" :vaults="v" @click="createVaultKeep(v.id, keep.id)">{{v.name}}</a></li>
