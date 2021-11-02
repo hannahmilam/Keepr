@@ -29,7 +29,7 @@
         <p class="mx-3">{{keep.description}}</p>
         </div>
         
-      <div class="card-footer mt-5 mb-0 p-0 bg-transparent my-2 justify-content-around">
+      <div class="card-footer mb-0 p-0 bg-transparent my-2 justify-content-around">
         <div class="row justify-content-between m-0 p-0">
         <div class="col-5 text-center p-0">
           <div class="input-group mb-3">
@@ -123,11 +123,15 @@ props: {
   background-size: cover;
   width: 100%;
   height: 100%;
-  max-height: 20rem;
+  max-height: 22rem;
+  min-height: 20rem;
 }
 .card{
   min-width: 35rem;
-  max-height: 20rem;
+}
+.card-body{
+  min-height: 40%;
+  max-height: 60%;
 }
 .card-footer{
   border: none;
