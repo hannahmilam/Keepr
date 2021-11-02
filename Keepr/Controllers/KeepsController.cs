@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
@@ -26,7 +27,7 @@ namespace Keepr.Controllers
       {
            return _keepsService.GetAll();
       }
-      catch (System.Exception e)
+      catch (Exception e)
       {
         return BadRequest(e.Message);
       }
@@ -56,7 +57,7 @@ namespace Keepr.Controllers
         createdKeep.Creator = userInfo;
         return Ok(createdKeep);
       }
-      catch (System.Exception e)
+      catch (Exception e)
       {
         return BadRequest(e.Message);
       }
@@ -73,7 +74,7 @@ namespace Keepr.Controllers
         var updatedKeep = _keepsService.Edit(data);
         return Ok(updatedKeep);
       }
-      catch (System.Exception e)
+      catch (Exception e)
       {
         return BadRequest(e.Message);
       }
@@ -88,7 +89,7 @@ namespace Keepr.Controllers
         var keep = _keepsService.Delete(keepId, userInfo.Id);
         return Ok(keep);
       }
-      catch (System.Exception e)
+      catch (Exception e)
       {
         return BadRequest(e.Message);
       }

@@ -37,7 +37,12 @@ namespace Keepr.Repositories
 
     public void Delete(int id)
     {
-      string sql = "DELETE FROM vaultKeep WHERE id = @id LIMIT 1;";
+      string sql = @"DELETE FROM vaultKeep WHERE id = @id LIMIT 1;
+      UPDATE keeps
+        SET 
+          keeps = @Keeps - 1
+        WHERE id = @Id
+        LIMIT 1;";
       var affectedRows = _db.Execute(sql, new {id});
       if(affectedRows == 0)
       {
@@ -52,7 +57,8 @@ namespace Keepr.Repositories
       FROM vaultKeep vk
       JOIN accounts a on vk.creatorId = a.id
       JOIN keeps k on vk.keepId = k.id
-      WHERE vk.id = @vaultKeepId;";
+      WHERE vk.id = @vaultKeepId;
+     ";
       return _db.Query<VaultKeep, Profile, Keep, VaultKeep>(sql, (vk, a, k) => 
       {
         vk.CreatorId = a.Id;
@@ -74,6 +80,11 @@ namespace Keepr.Repositories
         @VaultId,
         @KeepId
           );
+      UPDATE keeps
+        SET 
+          keeps = @Keeps + 1
+        WHERE id = @Id
+        LIMIT 1
       SELECT LAST_INSERT_ID();";
       data.Id = _db.ExecuteScalar<int>(sql, data);
       return data;

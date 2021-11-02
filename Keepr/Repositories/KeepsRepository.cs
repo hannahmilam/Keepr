@@ -35,7 +35,12 @@ namespace Keepr.Repositories
       SELECT *
       FROM keeps k
       JOIN accounts a on k.creatorId = a.id
-      WHERE k.id = @keepId;";
+      WHERE k.id = @keepId;
+       UPDATE keeps
+        SET 
+          views = views + 1
+        WHERE id = @keepId
+        LIMIT 1;";
       return _db.Query<Keep, Profile, Keep>(sql, (k, a) =>
       {
         k.Creator = a;

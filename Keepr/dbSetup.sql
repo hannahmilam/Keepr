@@ -67,8 +67,23 @@ UPDATE keeps
           );
     
       SELECT * FROM vaultKeep;
+      SELECT * FROM keeps WHERE id = 597;
 
       SELECT *
       FROM vaults v
       JOIN accounts a ON v.creatorId = a.id;
       WHERE v.creatorId = @profileId;
+
+      UPDATE keeps
+        SET 
+          keeps = 1 + 1
+        WHERE id = 641
+        LIMIT 1;
+
+        UPDATE keeps
+        SET
+          views = 0 + 1
+        WHERE id = 641
+        LIMIT 1;
+
+      SELECT * FROM keeps WHERE id = 641;
