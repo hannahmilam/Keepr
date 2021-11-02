@@ -1,6 +1,6 @@
 <template>
     <div class="row mt-2">
-        <div class="col-1 offset-11">
+        <div class="col-1 p-2 offset-10">
            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
       </div>

@@ -1,6 +1,6 @@
 <template>
     <div class="row mt-2">
-        <div class="col-1 offset-11">
+        <div class="col-1 p-2 offset-10">
            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         </div>
@@ -41,7 +41,8 @@
       <div class="form-check form-switch">
           <input class="form-check-input" type="checkbox" id="private">
           <label class="form-check-label" for="closed">
-            <p>Private?</p>
+            <p class="mb-0 pb-0">Private? </p>
+            <small><em>private vaults can only be seen by you</em></small>
           </label>
         </div>
     <div>
