@@ -10,12 +10,26 @@
            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
           </div>
+
+          <div class="row justify-content-around mt-4">
+            <div class="col-1 text-center ms-3">
+              <h5><i class="mdi mdi-eye"></i></h5>
+            </div>
+            <div class="col-1 text-center">
+              <h5><i class="mdi mdi-alpha-k-box-outline"></i></h5>
+            </div>
+            <div class="col-1 me-5 text-center">
+               <h5><i class="mdi mdi-share-variant"></i></h5>
+            </div>
+          </div>
+
+        <div class="row my-3">
         <h2 class="text-center">{{keep.name}}</h2>
         <p class="mx-3">{{keep.description}}</p>
-      <div class="row mb-2 justify-content-around">
-      
+        </div>
         
-        <div class="col-5 text-center m-0 p-0">
+      <div class="row my-2 justify-content-around">
+        <div class="col-5 text-center ms-5 p-0">
           <div class="input-group mb-3">
         <button class="btn btn-outline-info dropdown-toggle m-0 px-1" data-bs-toggle="dropdown" aria-expanded="false"><small>Add To Vault</small></button>
         <ul class="dropdown-menu">
