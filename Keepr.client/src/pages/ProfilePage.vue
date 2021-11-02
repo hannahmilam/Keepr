@@ -45,19 +45,19 @@ import { keepsService } from '../services/KeepsService'
 import { profilesService } from '../services/ProfilesService'
 import { useRoute } from 'vue-router'
 import { logger } from '../utils/Logger'
+import { router } from '../router'
 export default {
   setup(){
     const route = useRoute()
     onMounted(() => {
-      vaultsService.getVaultsByProfile(route.params.profileId)
-      keepsService.getKeepsByProfile(route.params.profileId)
-      profilesService.getProfileById(route.params.profileId)
-      
+        vaultsService.getVaultsByProfile(route.params.profileId)
+        keepsService.getKeepsByProfile(route.params.profileId)
+        profilesService.getProfileById(route.params.profileId)
     })
     return{
       account: computed(() => AppState.account),
       keeps: computed(() => AppState.keeps),
-      vaults: computed(() => AppState.vaults.filter(v => v.creator.id === route.params.profileId)),
+      vaults: computed(() => AppState.profileVaults),
       profile: computed(() => AppState.currentProfile)
     }
   }

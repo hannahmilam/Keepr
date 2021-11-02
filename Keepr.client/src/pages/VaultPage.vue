@@ -1,5 +1,5 @@
 <template>
-<div class="container-fluid">
+<div class="container-fluid" v-if="vault">
   <div class="row">
     <VaultDetails />
   </div>
@@ -16,6 +16,7 @@ import { Vault } from '../Models/Vault'
 import Pop from '../utils/Pop'
 import { keepsService } from '../services/KeepsService'
 import { logger } from '../utils/Logger'
+import { router } from '../router'
 export default {
   props: {
     vault: {
@@ -30,8 +31,9 @@ setup(props){
       await vaultsService.getVaultById(route.params.vaultId)
       await keepsService.getKeepsByVaultId(route.params.vaultId)
     } catch (error) {
-      Pop.toast(error.message, 'error')
-      logger.log()
+      Pop.toast('You Are Not Authorized', 'error')
+      router.push({name: 'Home'})
+
     }
   })
   return{
