@@ -67,7 +67,7 @@ namespace Keepr.Repositories
       }, new {vaultKeepId}).FirstOrDefault();
     }
 
-    public VaultKeep CreateVaultKeeps(VaultKeep data)
+    public VaultKeep CreateVaultKeeps(VaultKeep data, int keepId)
     {
       string sql = @"
       INSERT INTO vaultKeep(
@@ -84,7 +84,7 @@ namespace Keepr.Repositories
       UPDATE keeps k
         SET 
           keeps = keeps + 1
-        WHERE id = k.id
+        WHERE id = @keepId
         LIMIT 1;";
       data.Id = _db.ExecuteScalar<int>(sql, data);
       return data;
