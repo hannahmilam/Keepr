@@ -1,7 +1,7 @@
 <template>
 <div class="grid-item my-3" v-if="keep !== null">
   <div class="card p-0 m-0 selectable">
-    <div class="card-body m-0 p-0 selectable " data-bs-toggle="modal" :data-bs-target="'#keep-details-'+keep.id">
+    <div class="card-body m-0 p-0 selectable " @click="getById" data-bs-toggle="modal" :data-bs-target="'#keep-details-'+keep.id">
       <img :src="keep.img" class="card-img" loading="lazy" alt="keep image">
     </div>
     <div class="card-footer m-0 p-0">
@@ -32,6 +32,7 @@ import { AppState } from '../AppState'
 import { Keep } from '../Models/Keep'
 import { Modal } from 'bootstrap'
 import { router } from '../router'
+import { keepsService } from '../services/KeepsService'
 export default {
   props: {
     keep: { 
@@ -45,6 +46,9 @@ setup(props){
           const modal = Modal.getOrCreateInstance(document.getElementById(`keep-details-${props.keep.id}`))
           modal.hide()
           router.push({ name: 'Profile', params: { profileId: props.keep.creatorId}})
+      },
+      async getById(){
+        await keepsService.getKeepById(props.keep.id)
       }
   }
 }
