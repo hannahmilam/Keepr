@@ -1,5 +1,5 @@
 <template>
-<div class="row ms-3 justify-content-between" v-if="vault">
+<div class="row ms-3 justify-content-between">
   <div class="col-6">
 <h1>{{vault?.name}}</h1>
 <small>Keeps: {{keeps.length}}</small>

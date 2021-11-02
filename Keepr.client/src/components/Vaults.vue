@@ -1,6 +1,22 @@
 <template>
-<div class="grid-item my-3">
-  <router-link :to="{name: 'Vault', params: {vaultId: vault.id}}" class="selectable" v-if="vault.isPrivate === false">
+<div class="grid-item my-3" v-if="vault.isPrivate === false && vault.creatorId !== account.id">
+  <router-link :to="{name: 'Vault', params: {vaultId: vault.id}}" class="selectable">
+  <div class="card p-0 m-0 selectable">
+    <i class="mdi mdi-lock" v-if="vault.isPrivate === true"></i>
+    <div class="card-body m-0 p-0">
+    <img :src="vault.img" class="card-img" loading="lazy" alt="vault image">
+    </div>
+    <div class="card-footer m-0 p-0 clip-text">
+       <h4 class="ms-2">{{vault.name}}</h4>
+       <p class="ms-2">{{vault.description}}</p>
+    </div>
+  </div>
+  </router-link>
+</div>
+
+
+<div class="grid-item my-3" v-if="account.id === vault.creatorId">
+  <router-link :to="{name: 'Vault', params: {vaultId: vault.id}}" class="selectable">
   <div class="card p-0 m-0 selectable">
     <i class="mdi mdi-lock" v-if="vault.isPrivate === true"></i>
     <div class="card-body m-0 p-0">

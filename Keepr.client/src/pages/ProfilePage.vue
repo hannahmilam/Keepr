@@ -44,6 +44,7 @@ import { vaultsService } from '../services/VaultsService'
 import { keepsService } from '../services/KeepsService'
 import { profilesService } from '../services/ProfilesService'
 import { useRoute } from 'vue-router'
+import { logger } from '../utils/Logger'
 export default {
   setup(){
     const route = useRoute()
@@ -56,7 +57,7 @@ export default {
     return{
       account: computed(() => AppState.account),
       keeps: computed(() => AppState.keeps),
-      vaults: computed(() => AppState.vaults),
+      vaults: computed(() => AppState.vaults.filter(v => v.creator.id === route.params.profileId)),
       profile: computed(() => AppState.currentProfile)
     }
   }
