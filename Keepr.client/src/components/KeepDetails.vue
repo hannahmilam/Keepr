@@ -106,7 +106,7 @@ export default {
       },
       async createVaultKeep(vaultId, keepId){
         try {
-          if(await Pop.confirm()) {
+          if(await Pop.confirm('Are you sure?', '', 'info', 'Yes, save keep to vault!')) {
             const modal = Modal.getOrCreateInstance(document.getElementById(`keep-details-${this.keep.id}`))
             modal.hide()
             await keepsService.createVaultKeep(vaultId, keepId)
