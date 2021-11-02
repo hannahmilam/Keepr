@@ -20,13 +20,9 @@ namespace Keepr.Services
       _vs = vs;
     }
 
-    public List<VaultKeepIdModel> GetKeepsByVaultId(int vaultId)
+    public List<VaultKeepIdModel> GetKeepsByVaultId(int vaultId, string userId)
    {
-    var foundVault = _vr.GetById(vaultId);
-    if(foundVault.IsPrivate == true)
-    {
-      throw new Exception("Vault Is Private");
-    }
+    var foundVault = _vs.GetById(vaultId, userId);
     return _vkr.GetKeepsByVaultId(vaultId);
   }
 
