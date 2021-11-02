@@ -45,7 +45,7 @@ namespace Keepr.Services
       {
         throw new Exception("You are not authorized!");
       }
-      _vkr.Delete(vaultKeepId);
+      _vkr.Delete(vaultKeepId, vaultKeep.KeepId);
     }
     public VaultKeep GetVaultKeep(int vaultKeepId)
     {

@@ -1,11 +1,11 @@
 <template>
-<div class="card" v-if="keep">
+<!-- <div class="card" v-if="keep"> -->
 <div class="row">
       <div class="col-md-6">
       <img :src="keep.img" class="details-img rounded-start" alt="">
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6 d-flex details-col">
           <div class="row mt-2">
         <div class="col-2 offset-10">
            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -30,13 +30,13 @@
             </div>
           </div>
 
-        <div class="card-body my-3">
+        <div class="row my-3 flex-grow">
         <h2 class="text-center">{{keep.name}}</h2>
         <p class="mx-3">{{keep.description}}</p>
         </div>
         
-      <div class="card-footer mb-0 p-0 bg-transparent my-2 justify-content-around">
-        <div class="row justify-content-center m-0 p-0">
+      <!-- <div class="card-footer mb-0 p-0 bg-transparent my-2 justify-content-around"> -->
+        <div class="row justify-content-center p-0">
         <div class="col-5 p-0">
           <div class="input-group  mb-3">
         <button class="btn btn-outline-info dropdown-toggle m-0 px-1" data-bs-toggle="dropdown" aria-expanded="false"><small>Add To Vault</small></button>
@@ -55,8 +55,8 @@
         </div>
         </div>
       </div>
-      </div>
-  </div>
+      <!-- </div> -->
+  <!-- </div> -->
 </template>
 
 <script>
@@ -129,17 +129,11 @@ export default {
   background-size: cover;
   width: 100%;
   height: 100%;
-  max-height: 22rem;
-  min-height: 20rem;
 }
-.card{
-  min-width: 35rem;
+.details-col{
+  flex-direction: column;
 }
-.card-body{
-  min-height: 40%;
-  max-height: 60%;
-}
-.card-footer{
-  border: none;
+.flex-grow{
+  flex-grow: 1;
 }
 </style>
