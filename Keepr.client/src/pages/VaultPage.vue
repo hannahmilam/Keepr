@@ -10,7 +10,7 @@
 import { computed } from '@vue/reactivity'
 import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
-import { onMounted } from '@vue/runtime-core'
+import { onMounted, watchEffect } from '@vue/runtime-core'
 import { vaultsService } from '../services/VaultsService'
 import { Vault } from '../Models/Vault'
 import Pop from '../utils/Pop'
@@ -25,7 +25,7 @@ export default {
   },
 setup(props){
   const route = useRoute()
-  onMounted(async () => {
+  watchEffect(async () => {
     try {
       await vaultsService.getVaultById(route.params.vaultId)
       await keepsService.getKeepsByVaultId(route.params.vaultId)

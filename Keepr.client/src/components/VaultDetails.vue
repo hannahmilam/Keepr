@@ -4,7 +4,7 @@
 <h1>{{vault?.name}}</h1>
 <small>Keeps: {{keeps.length}}</small>
 </div>
-<div class="col-2 text-center" v-if="vault.creatorId === account.id">
+<div class="col-2 text-center" v-if="account?.id === vault?.creatorId">
   <button class="btn btn-outline-secondary" @click="deleteVault(vault.id)">Delete Vault</button>
 </div>
 </div>
