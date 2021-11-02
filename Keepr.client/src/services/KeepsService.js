@@ -42,6 +42,7 @@ class KeepsService{
       const res = await api.post('api/vaultkeeps', vaultKeep)
       AppState.vaultKeeps.push(new VaultKeep(res.data))
       logger.log('create vault keep res.data', AppState.vaultKeeps)
+      logger.log(AppState.keeps)
     }
     
     async editKeep(keep){

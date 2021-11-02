@@ -40,7 +40,7 @@ namespace Keepr.Repositories
       string sql = @"DELETE FROM vaultKeep WHERE id = @id LIMIT 1;
       UPDATE keeps
         SET 
-          keeps = @Keeps - 1
+          keeps = keeps - 1
         WHERE id = @Id
         LIMIT 1;";
       var affectedRows = _db.Execute(sql, new {id});
@@ -80,12 +80,12 @@ namespace Keepr.Repositories
         @VaultId,
         @KeepId
           );
-      UPDATE keeps
+      SELECT LAST_INSERT_ID();
+      UPDATE keeps k
         SET 
-          keeps = @Keeps + 1
-        WHERE id = @Id
-        LIMIT 1
-      SELECT LAST_INSERT_ID();";
+          keeps = keeps + 1
+        WHERE id = k.id
+        LIMIT 1;";
       data.Id = _db.ExecuteScalar<int>(sql, data);
       return data;
     }
