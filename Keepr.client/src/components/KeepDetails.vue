@@ -17,7 +17,7 @@
              <i class="mdi mdi-eye"> </i>
             </div>
             <div class="col-1">
-              <span> {{keep.views}} </span>
+              <span> {{viewCount}} </span>
             </div>
             <div class="col-1 text-center">
              <i class="mdi mdi-alpha-k-box-outline"></i>
@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/reactivity'
+import { computed, ref } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { Keep } from '../Models/Keep'
 import { useRoute } from 'vue-router'
@@ -79,13 +79,12 @@ props: {
   }
 },
   setup(props){
-    onMounted(() => {
-      vaultsService.getVaults()
-    })
+    const viewCount = ref(props.keep.views)
     return{
+      viewCount,
       props,
       account: computed(() => AppState.account),
-      vaults: computed(() => AppState.vaults.filter(v => v.creator.id === AppState.account.id)),
+      vaults: computed(() => AppState.accountVaults),
       goToProfile() {
        const modal = Modal.getInstance(document.getElementById(`keep-details-${props.keep.id}`))
         modal.hide()
