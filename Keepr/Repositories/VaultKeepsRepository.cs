@@ -35,13 +35,13 @@ namespace Keepr.Repositories
       }, new {vaultId}).ToList();
     }
 
-    public void Delete(int id, int keepId)
+    public void Delete(int id)
     {
       string sql = @"DELETE FROM vaultKeep WHERE id = @id LIMIT 1;
       UPDATE keeps
         SET 
           keeps = keeps - 1
-        WHERE id = @keepId
+        WHERE id = @id
         LIMIT 1;";
       var affectedRows = _db.Execute(sql, new {id});
       if(affectedRows == 0)
