@@ -1,4 +1,5 @@
 <template>
+<div class="card">
 <div class="row">
       <div class="col-md-6">
       <img :src="keep.img" class="details-img rounded-start" alt="">
@@ -23,13 +24,14 @@
             </div>
           </div>
 
-        <div class="row my-3">
+        <div class="card-body my-3">
         <h2 class="text-center">{{keep.name}}</h2>
         <p class="mx-3">{{keep.description}}</p>
         </div>
         
-      <div class="row my-2 justify-content-around">
-        <div class="col-5 text-center ms-5 p-0">
+      <div class="card-footer mt-5 mb-0 p-0 bg-transparent my-2 justify-content-around">
+        <div class="row justify-content-between m-0 p-0">
+        <div class="col-5 text-center p-0">
           <div class="input-group mb-3">
         <button class="btn btn-outline-info dropdown-toggle m-0 px-1" data-bs-toggle="dropdown" aria-expanded="false"><small>Add To Vault</small></button>
         <ul class="dropdown-menu">
@@ -37,17 +39,18 @@
           </ul>
         </div>
         </div>
-        <div class="col-1 text-center m-0 p-0" v-if="keep.creatorId === account.id">
+        <div class="col-1 text-center" v-if="keep.creatorId === account.id">
           <i class="mdi mdi-delete selectable" @click="deleteKeep(keep.id)"></i>
         </div>
-        <div class="col-5 text-center m-0 p-0">
+        <div class="col-5 profile text-center">
           <img :src="keep.creator?.picture" height="40" class="rounded-circle action" alt="" @click="goToProfile">
           </div>
           
         </div>
+        </div>
       </div>
       </div>
-
+  </div>
 </template>
 
 <script>
@@ -119,5 +122,14 @@ props: {
 .details-img{
   background-size: cover;
   width: 100%;
+  height: 100%;
+  max-height: 20rem;
+}
+.card{
+  min-width: 35rem;
+  max-height: 20rem;
+}
+.card-footer{
+  border: none;
 }
 </style>
