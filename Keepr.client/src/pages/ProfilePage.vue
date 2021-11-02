@@ -11,13 +11,13 @@
       <small>Keeps: {{keeps.length}} </small>
     </div>
   </div>
-    <h3>Vaults <i class="mdi mdi-plus text-info action" data-bs-toggle="modal" data-bs-target="#vault-form"></i></h3>
+    <h3>Vaults <i class="mdi mdi-plus text-info action" data-bs-toggle="modal" data-bs-target="#vault-form" v-if="profile.id === account.id"></i></h3>
   <div class="grid">
   <Vaults v-for="v in vaults" :key="v.id" :vault="v"/>
   </div>
 
 
-    <h3>Keeps <i class="mdi mdi-plus text-info action" data-bs-toggle="modal" data-bs-target="#keep-form"></i></h3>
+    <h3>Keeps <i class="mdi mdi-plus text-info action" data-bs-toggle="modal" data-bs-target="#keep-form" v-if="profile.id === account.id"></i></h3>
   <div class="grid">
     <Keeps v-for="k in keeps" :key="k.id" :keep="k"/>
   </div>
