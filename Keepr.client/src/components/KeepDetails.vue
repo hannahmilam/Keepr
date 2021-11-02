@@ -1,5 +1,5 @@
 <template>
-<div class="card">
+<div class="card" v-if="keep">
 <div class="row">
       <div class="col-md-6">
       <img :src="keep.img" class="details-img rounded-start" alt="">
@@ -17,7 +17,7 @@
              <i class="mdi mdi-eye"> </i>
             </div>
             <div class="col-1">
-              <span> {{viewCount}} </span>
+              <span> {{keep.views}} </span>
             </div>
             <div class="col-1 text-center">
              <i class="mdi mdi-alpha-k-box-outline"></i>
@@ -72,23 +72,24 @@ import { logger } from '../utils/Logger'
 import { onMounted } from '@vue/runtime-core'
 import { vaultsService } from '../services/VaultsService'
 export default {
-props: {
-  keep: {
-    type: Keep,
-    default: () => {return new Keep()}
-  }
-},
-  setup(props){
-    const viewCount = ref(props.keep.views)
+// props: {
+//   keep: {
+//     type: Keep,
+//     default: () => {return new Keep()}
+//   }
+// },
+  setup(){
+    // const viewCount = ref(props.keep.views)
     return{
-      viewCount,
-      props,
+      // viewCount,
+      // props,
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.accountVaults),
+      keep: computed(() => AppState.keep),
       goToProfile() {
-       const modal = Modal.getInstance(document.getElementById(`keep-details-${props.keep.id}`))
+       const modal = Modal.getInstance(document.getElementById(`keep-details-${this.keep.id}`))
         modal.hide()
-        router.push({ name: 'Profile', params: { profileId: props.keep.creatorId}})
+        router.push({ name: 'Profile', params: { profileId: this.keep.creatorId}})
       },
       async deleteKeep(keepId){
         try {
@@ -106,7 +107,7 @@ props: {
       async createVaultKeep(vaultId, keepId){
         try {
           if(await Pop.confirm()) {
-            const modal = Modal.getOrCreateInstance(document.getElementById(`keep-details-${props.keep.id}`))
+            const modal = Modal.getOrCreateInstance(document.getElementById(`keep-details-${this.keep.id}`))
             modal.hide()
             await keepsService.createVaultKeep(vaultId, keepId)
             Pop.toast('keep added to vault', 'success')
