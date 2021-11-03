@@ -1,7 +1,7 @@
 <template>
 <div class="container-fluid" v-if="vault">
   <div class="row">
-    <VaultDetails />
+    <VaultDetails  />
   </div>
 </div>
 </template>

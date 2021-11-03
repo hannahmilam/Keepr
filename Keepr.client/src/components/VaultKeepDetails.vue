@@ -38,7 +38,7 @@
         
           <div class="row justify-content-center mb-3 p-0">
         <div class="col-8 text-center m-0 p-0">
-          <button class="btn btn-outline-secondary" @click="deleteVaultKeep(keep.vaultKeepId, keep.id)">Remove From Vault</button>
+          <button class="btn btn-outline-secondary" v-if="vault.creatorId === account.id" @click="deleteVaultKeep(keep.vaultKeepId, keep.id)">Remove From Vault</button>
           </div>
         <div class="col-1 text-center m-0 p-0">
           <img :src="keep.creator?.picture" height="40" class="rounded-circle action" alt="" @click="goToProfile">
@@ -57,14 +57,19 @@ import { router } from '../router'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
 import { keepsService } from '../services/KeepsService'
+import { watch, watchEffect } from '@vue/runtime-core'
+import { vaultsService } from '../services/VaultsService'
 
 export default {
-
+  
   setup(){
+  
     return{
       account: computed(() => AppState.account),
       keep: computed(() => AppState.keep),
       vaults: computed(() => AppState.accountVaults),
+      vault: computed(() => AppState.vault),
+      profileVaults: computed(() => AppState.profileVaults),
       goToProfile() {
        const modal = Modal.getInstance(document.getElementById(`vaultkeep-details-${this.keep.id}`))
         modal.hide()
@@ -101,5 +106,8 @@ export default {
 }
 .flex-grow{
   flex-grow: 1;
+}
+p{
+  width: 10rem;
 }
  </style>
