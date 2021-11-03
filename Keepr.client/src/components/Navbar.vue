@@ -58,25 +58,32 @@
           Login
         </button>
 
-        <div class="dropdown my-2 my-lg-0" v-else>
-          <div
-            class="dropdown-toggle selectable"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            id="authDropdown"
-          >
+        <div class="dropdown row my-2 my-lg-0" v-else>
+          <div class="col-2">
+          <router-link :to="{ name: 'Profile', params: {profileId: account.id} }" class="action">
             <img
               :src="user.picture"
               alt="user photo"
               height="40"
               class="rounded"
             />
+          </router-link>
+          </div>
+          <div class="col-5">
+          <div
+            class="dropdown-toggle action"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            id="authDropdown"
+          >
             <span class="mx-3">{{ user.name }}</span>
           </div>
+          
           <div
             class="dropdown-menu p-0 list-group w-100"
             aria-labelledby="authDropdown"
           >
+         
             <router-link :to="{ name: 'Account' }">
               <div class="list-group-item list-group-item-action hoverable">
                 Manage Account
@@ -89,6 +96,7 @@
               <i class="mdi mdi-logout"></i>
               logout
             </div>
+             </div>
           </div>
         </div>
       </span>
@@ -109,6 +117,7 @@ export default {
     return {
       query,
       user: computed(() => AppState.user),
+      account: computed(() => AppState.account),
       async login() {
         AuthService.loginWithPopup()
       },
@@ -134,6 +143,7 @@ export default {
   display: block;
   transform: scale(0);
   transition: all 0.15s linear;
+ 
 }
 .dropdown-menu.show {
   transform: scale(1);
