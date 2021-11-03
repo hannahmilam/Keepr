@@ -1,8 +1,8 @@
 <template>
-<div class="grid-item my-3" v-if="keep != null">
+<div class="grid-item my-3" v-if="keep">
   <div class="card p-0 m-0 selectable">
-    <div class="card-body m-0 p-0 selectable " data-bs-toggle="modal" :data-bs-target="'#vaultkeep-details-'+keep.id">
-      <img :src="keep.img" class="card-img" loading="lazy" alt="keep image">
+    <div class="card-body m-0 p-0 selectable " data-bs-toggle="modal" :data-bs-target="'#vaultkeep-details-'+keep.id" @click="getById">
+      <img :src="keep.img" class="card-img"  alt="keep image">
     </div>
     <div class="card-footer m-0 p-0">
       <div class="row mt-1 pb-1 justify-content-around">
@@ -30,6 +30,7 @@ import { AppState } from '../AppState'
 import { Keep } from '../Models/Keep'
 import { Modal } from 'bootstrap'
 import { router } from '../router'
+import { keepsService } from '../services/KeepsService'
 export default {
   props: {
     keep: { 
@@ -40,9 +41,12 @@ export default {
 setup(props){
   return{
         goToProfile() {
-          const modal = Modal.getOrCreateInstance(document.getElementById(`keep-details-${props.keep.id}`))
+          const modal = Modal.getOrCreateInstance(document.getElementById(`vaultkeep-details-${props.keep.id}`))
           modal.hide()
           router.push({ name: 'Profile', params: { profileId: props.keep.creatorId}})
+      },
+      async getById(){
+        await keepsService.getKeepById(props.keep.id)
       }
   }
 }

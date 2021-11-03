@@ -1,5 +1,4 @@
  <template>
- <!-- <div class="card"> -->
    <div class="row" v-if="keep">
       <div class="col-md-6">
       <img :src="keep.img" class="details-img rounded-start" alt="">
@@ -39,15 +38,14 @@
         
           <div class="row justify-content-center mb-3 p-0">
         <div class="col-8 text-center m-0 p-0">
-          <button class="btn btn-outline-secondary" @click="deleteVaultKeep(keep.vaultKeepId)">Remove From Vault</button>
+          <button class="btn btn-outline-secondary" @click="deleteVaultKeep(keep.vaultKeepId, keep.id)">Remove From Vault</button>
           </div>
         <div class="col-1 text-center m-0 p-0">
           <img :src="keep.creator?.picture" height="40" class="rounded-circle action" alt="" @click="goToProfile">
           </div>
           </div>
           </div>
-          
-        </div>
+          </div>
       </template>
  
 <script>
@@ -61,26 +59,21 @@ import { logger } from '../utils/Logger'
 import { keepsService } from '../services/KeepsService'
 
 export default {
-props: {
-  keep: {
-    type: Keep,
-    default: () => {return new Keep()}
-  }
-},
-  setup(props){
+
+  setup(){
     return{
-      props,
       account: computed(() => AppState.account),
-      vaults: computed(() => AppState.vaults.filter(v => v.creator.id === AppState.account.id)),
+      keep: computed(() => AppState.keep),
+      vaults: computed(() => AppState.accountVaults),
       goToProfile() {
-       const modal = Modal.getInstance(document.getElementById(`vaultkeep-details-${props.keep.id}`))
+       const modal = Modal.getInstance(document.getElementById(`vaultkeep-details-${this.keep.id}`))
         modal.hide()
-        router.push({ name: 'Profile', params: { profileId: props.keep.creatorId}})
+        router.push({ name: 'Profile', params: { profileId: this.keep.creatorId}})
       },
-      async deleteVaultKeep(vaultKeepId){
+      async deleteVaultKeep(vaultKeepId, keepId){
         try {
           if(await Pop.confirm()){
-            const modal = Modal.getOrCreateInstance(document.getElementById(`vaultkeep-details-${props.keep.id}`))
+            const modal = Modal.getOrCreateInstance(document.getElementById(`vaultkeep-details-${keepId}`))
             modal.hide()
             await keepsService.deleteVaultKeep(vaultKeepId)
             Pop.toast('Keep Deleted')
