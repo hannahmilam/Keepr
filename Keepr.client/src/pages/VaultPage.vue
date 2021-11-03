@@ -28,7 +28,7 @@ setup(props){
   const route = useRoute()
   watchEffect(async () => {
     try {
-      await vaultsService.getVaultById(route.params.vaultId)
+       await  vaultsService.getVaultById(route.params.vaultId)
       await keepsService.getKeepsByVaultId(route.params.vaultId)
     } catch (error) {
       Pop.toast('You Are Not Authorized', 'error')

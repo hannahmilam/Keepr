@@ -8,8 +8,11 @@
   <button class="btn btn-outline-secondary" @click="deleteVault(vault.id)">Delete Vault</button>
 </div>
 </div>
-<div class="grid">
+<div class="grid" v-if="keeps.length > 0">
   <VaultKeeps v-for="k in keeps" :key="k.id" :keep="k" />
+</div>
+<div class="row" v-else>
+  <img src="https://images.unsplash.com/photo-1591178761188-885caa0b4fc3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y29sbGFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"  alt="">
 </div>
 </template>
 

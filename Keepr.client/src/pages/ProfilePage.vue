@@ -12,13 +12,13 @@
     </div>
   </div>
     <h3>Vaults <i class="mdi mdi-plus text-info action" data-bs-toggle="modal" data-bs-target="#vault-form" v-if="profile.id === account.id"></i></h3>
-  <div class="grid">
+  <div class="grid text-center">
   <Vaults v-for="v in vaults" :key="v.id" :vault="v"/>
   </div>
 
 
     <h3>Keeps <i class="mdi mdi-plus text-info action" data-bs-toggle="modal" data-bs-target="#keep-form" v-if="profile.id === account.id"></i></h3>
-  <div class="grid">
+  <div class="grid text-center">
     <Keeps v-for="k in keeps" :key="k.id" :keep="k"/>
   </div>
 </div>
