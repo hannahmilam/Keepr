@@ -1,6 +1,6 @@
 <template>
 <!-- <div class="card" v-if="keep"> -->
-<div class="row">
+<div class="row" v-if="keep">
       <div class="col-md-6">
       <img :src="keep.img" class="details-img rounded-start" alt="">
       </div>
