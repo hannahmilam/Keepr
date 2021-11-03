@@ -12,6 +12,7 @@
   <VaultKeeps v-for="k in keeps" :key="k.id" :keep="k" />
 </div>
 <div class="row" v-else>
+  <h1 class="ms-3 add-keeps">ADD KEEPS TO YOUR VAULT</h1>
   <img src="https://images.unsplash.com/photo-1591178761188-885caa0b4fc3?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y29sbGFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"  alt="">
 </div>
 </template>
@@ -59,5 +60,10 @@ export default {
   flex-wrap: wrap;
   flex-direction: column;
 }
-
+.add-keeps{
+  position: absolute;
+  top: 30%;
+  color: white;
+   text-shadow: 0 5px 5px black;
+}
 </style>

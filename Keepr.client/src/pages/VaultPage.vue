@@ -31,7 +31,7 @@ setup(props){
        await  vaultsService.getVaultById(route.params.vaultId)
       await keepsService.getKeepsByVaultId(route.params.vaultId)
     } catch (error) {
-      Pop.toast('You Are Not Authorized', 'error')
+      // Pop.toast('You Are Not Authorized', 'error')
       router.push({name: 'Home'})
 
     }
