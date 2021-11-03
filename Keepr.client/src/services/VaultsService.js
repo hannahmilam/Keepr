@@ -6,7 +6,6 @@ import { api } from "./AxiosService"
 class VaultsService {
 
 async getVaults(){
-AppState.vaults = []
 const res = await api.get('api/vaults')
 AppState.vaults = res.data.map(v => new Vault(v))
 }
