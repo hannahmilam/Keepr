@@ -1,38 +1,43 @@
  <template>
- <div class="card">
-   <div class="row">
+ <!-- <div class="card"> -->
+   <div class="row" v-if="keep">
       <div class="col-md-6">
       <img :src="keep.img" class="details-img rounded-start" alt="">
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6 d-flex details-col">
           <div class="row mt-2">
         <div class="col-2 offset-10">
            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
           </div>
 
-         <div class="row justify-content-around mt-4">
-            <div class="col-1 text-center ms-3">
-              <h5><i class="mdi mdi-eye"></i></h5>
+        <div class="row justify-content-center mt-4">
+            <div class="col-1 ms-3 text-center">
+             <i class="mdi mdi-eye"> </i>
+            </div>
+            <div class="col-1">
+              <span> {{keep.views}} </span>
             </div>
             <div class="col-1 text-center">
-              <h5><i class="mdi mdi-alpha-k-box-outline"></i></h5>
+             <i class="mdi mdi-alpha-k-box-outline"></i>
             </div>
-            <div class="col-1 me-5 text-center">
-               <h5><i class="mdi mdi-share-variant"></i></h5>
+            <div class="col-1">
+              <span> {{keep.keeps}} </span>
             </div>
-         <div class="row mb-2 justify-content-around">
+            <div class="col-1 me-3 text-center">
+              <i class="mdi mdi-share-variant"></i>
+            </div>
+          </div>
 
-        <div class="card-body my-3">
+
+         <div class="row mt-3 flex-grow">
         <h2 class="text-center">{{keep.name}}</h2>
         <p class="mx-3">{{keep.description}}</p>
         </div>
-        </div>
       
         
-        <div class="card-footer mt-1 p-0 bg-transaprent my-3">
-          <div class="row m-0 p-0">
+          <div class="row justify-content-center mb-3 p-0">
         <div class="col-8 text-center m-0 p-0">
           <button class="btn btn-outline-secondary" @click="deleteVaultKeep(keep.vaultKeepId)">Remove From Vault</button>
           </div>
@@ -43,9 +48,6 @@
           </div>
           
         </div>
-        </div>
-      </div>
-      </div>
       </template>
  
 <script>
@@ -100,13 +102,11 @@ props: {
   background-size: cover;
   width: 100%;
   height: 100%;
-  max-height: 20rem;
 }
-.card{
-  min-width: 35rem;
-  max-height: 20rem;
+.details-col{
+  flex-direction: column;
 }
-.card-footer{
-  border: none;
+.flex-grow{
+  flex-grow: 1;
 }
  </style>
