@@ -1,5 +1,4 @@
 <template>
-<!-- <div class="card" v-if="keep"> -->
 <div class="row" v-if="keep">
       <div class="col-md-6">
       <img :src="keep.img" class="details-img rounded-start" alt="">
@@ -35,7 +34,6 @@
         <p class="mx-3">{{keep.description}}</p>
         </div>
         
-      <!-- <div class="card-footer mb-0 p-0 bg-transparent my-2 justify-content-around"> -->
         <div class="row justify-content-center p-0">
         <div class="col-5 p-0">
           <div class="input-group  mb-3">
@@ -55,8 +53,6 @@
         </div>
         </div>
       </div>
-      <!-- </div> -->
-  <!-- </div> -->
 </template>
 
 <script>
@@ -72,17 +68,9 @@ import { logger } from '../utils/Logger'
 import { onMounted } from '@vue/runtime-core'
 import { vaultsService } from '../services/VaultsService'
 export default {
-// props: {
-//   keep: {
-//     type: Keep,
-//     default: () => {return new Keep()}
-//   }
-// },
+
   setup(){
-    // const viewCount = ref(props.keep.views)
     return{
-      // viewCount,
-      // props,
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.accountVaults),
       keep: computed(() => AppState.keep),
@@ -135,5 +123,9 @@ export default {
 }
 .flex-grow{
   flex-grow: 1;
+}
+.dropdown-menu{
+  overflow-y: scroll;
+  height: 15rem;
 }
 </style>
